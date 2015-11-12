@@ -93,3 +93,61 @@ and open the template in the editor.
     height: 400px; 
     padding: 20px 10px 10px 10px;
 }
+.thumbnail img{
+    width: 97%;
+}
+.precio strong {
+    color: #09c;
+    font-size: 16px;
+}
+.resDatos{
+    width: 100%;
+    margin: 5px 0 0 -2px;
+    color: #666;   
+}
+.resDatos figure{
+    float: left;
+}
+.resDatos img{
+    width: 30px;
+}
+.dato1, .dato2, .dato3{
+    padding-left: 4px;
+    padding-right: 4px;
+    float: left;
+    width: auto;
+    font-size: 0.8em;
+    display: inline-block;
+    vertical-align: top;   
+}
+.dato3{
+    width: 110px;    
+}
+.resDormitorios, .resBanios, .resMetraje{    
+    margin-left: 10px;
+    margin-top: 6px;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+.boton-conoce{
+    padding-top: 10px;
+    padding-left: 65px;
+}
+.filtros{
+    width: 235px;
+    padding-left: 10px;
+    text-align: left;
+    color: #666;
+    padding-top: 10px;
+}
+.rangoNumero1, .rangoNumero2, .rangoNumero3, .rangoNumero4, .rangoNumero5, .rangoNumero6{
+    margin: 0;
+    padding: 0 0 0 0px;
+    width: 30px;
+    display: inline-block;
+    vertical-align: top;
+    color: #666;
+    font-size: 0.75em;
+}

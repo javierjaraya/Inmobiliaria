@@ -1,26 +1,32 @@
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=ISO-8859-1">
-        <title>Ejemplo de Google Maps API</title>
-        <script src="http://maps.google.com/maps?file=api&v=2&key=AIzaSyBulBjDbfCLCejM7gUa7-sqVkRlkv38tG0" type="text/javascript"></script>
-        <script type="text/javascript">
-        //<![CDATA[
-            function load() {
-                if (GBrowserIsCompatible()) {
-                    var map = new GMap2(document.getElementById("map"));
-                    map.setCenter(new GLatLng(40.41689826118782, -3.7034815549850464), 17);
-                    map.addControl(new GLargeMapControl());
-                    map.setMapType(G_SATELLITE_MAP);
-
-                    //var point = new GPoint(-3.7034815549850464, 40.41689826118782);
-                    //var marker = new GMarker(point);
-                    //map.addOverlay(marker);
-                }
-            }
-        //]]>
+        <meta charset="utf-8">
+        <title>jQuery UI Slider - Range slider</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+            $(function () {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 500,
+                    values: [75, 300],
+                    slide: function (event, ui) {
+                        $("#amount").val("$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ]);
+                    }
+                });
+                $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+            });
         </script>
     </head>
-    <body onload="load()" onunload="GUnload()">
-        <div id="map" style="width: 615px; height: 400px"></div>
+    <body>
+        <p>
+            <label for="amount">Price range:</label>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+        <div id="slider-range"></div>
     </body>
 </html>
