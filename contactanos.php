@@ -1,6 +1,4 @@
 <?php include 'header.php'; ?>
-<!-- GOOGLE MAPS -->
-<script src="http://maps.google.com/maps?file=api&v=1&key=AIzaSyBulBjDbfCLCejM7gUa7-sqVkRlkv38tG0" type="text/javascript"></script>
 <div class="container">  
     <div class="row">
         <div class="col-md-5 formulario-contacto">
@@ -41,15 +39,65 @@
             </form>
         </div>
         <div class="col-md-7">
-            <div id="map" style="width: 400px; height: 300px"></div> 
-            <script type="text/javascript">
-                
-                
-            </script>
+            <div id="main" class="mapa">
+                <div>
+                    <address>
+                        <p><h4>Direccion:</h4> Av. Arturo Prat #567, Chillan. Region del Bio Bio</p>
+                        <p><h4>Fono:</h4> 042-256548</p>
+                    </address>
+                </div>
+                <div id="map-rutas" style="float:left;width:100%;height:100%;"></div>                                
+            </div>
         </div>
     </div>
 </div>            
 <script type="text/javascript">
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var chillan = new google.maps.LatLng(-36.61, -72.0997);
+        var mapOptions = {
+            zoom: 11,
+            center: chillan
+        }
+        map = new google.maps.Map(document.getElementById('map-rutas'), mapOptions);
+
+        directionsDisplay.setMap(map);
+
+        //setLocationGPS();
+
+    }
+
+    function updateLocation($latitud, $longitud, $descripcion) {
+        var position = new google.maps.LatLng($latitud, $longitud);
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: $descripcion
+        });
+
+        //marker.setIcon('https://dl.dropboxusercontent.com/u/20056281/Iconos/male-2.png');
+        marker.setIcon('files/img/persona.png');
+        marker.setMap(map);
+    }
+
+    function setLocationGPS() {
+        var url_json = 'servlet/app/administrarUbicacion.php?accion=OBTENER_LOCATION';
+        $.getJSON(
+                url_json,
+                function (datos) {
+                    $.each(datos, function (k, v) {
+                        updateLocation(v.latitud, v.longitud, v.phone);
+                    });
+                }
+        );
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
     function validar(nombre) {
         var contenido = document.getElementById(nombre).value;
         if (contenido != "" && contenido != null) {

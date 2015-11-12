@@ -78,6 +78,18 @@ and open the template in the editor.
 .columna-footer ul{
     list-style: none;
 }
+.empresa{
+    text-align: justify;
+    padding: 10px 20px 10px 20px;
+}
+.empresa img{
+    width: 100%;
+    margin: 0 auto;
+}
 .formulario-contacto{
     padding: 1px 40px 40px 40px;
+}
+.mapa{
+    height: 400px; 
+    padding: 20px 10px 10px 10px;
 }

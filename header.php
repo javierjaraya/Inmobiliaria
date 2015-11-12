@@ -19,13 +19,7 @@ and open the template in the editor.
                 $('.bxslider').bxSlider({
                     auto: true,
                     autoControls: false
-                });
-                
-                var map = new GMap(document.getElementById("map"));
-                map.setMapType(G_SATELLITE_TYPE);
-                map.addControl(new GLargeMapControl());
-                map.addControl(new GMapTypeControl());
-                map.centerAndZoom(new GPoint(-3.688788414001465, 40.41996541363825), 3);
+                });               
             });
         </script>
         
@@ -34,7 +28,9 @@ and open the template in the editor.
         <!-- BOOTSTRAP Optional theme -->
         <!--<link rel="stylesheet" href="Files/plugins/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" crossorigin="anonymous">-->
         <!-- BOOTSTRAP Latest compiled and minified JavaScript -->
-        <script src="Files/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>       
+        <script src="Files/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>  
+        <!-- GOOGLE MAPS -->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>    
         <link rel="stylesheet" href="Files/css/estilo.css">
     </head>
     <body>
