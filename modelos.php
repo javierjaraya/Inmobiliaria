@@ -27,7 +27,7 @@
                                 </section>
                             </section>
                             <section class="boton-conoce">
-                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="cargarModal()">Conoce más</button></p>     
+                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>     
                             </section>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                                 </section>
                             </section>
                             <section class="boton-conoce">
-                                <p><a href="#" class="btn btn-success" role="button">Conoce más</a></p>
+                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
                             </section>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                 </section>
                             </section>
                             <section class="boton-conoce">
-                                <p><a href="#" class="btn btn-success" role="button">Conoce más</a></p>
+                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
                             </section>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                                 </section>
                             </section>
                             <section class="boton-conoce">
-                                <p><a href="#" class="btn btn-success" role="button">Conoce más</a></p>
+                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
                             </section>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                                 </section>
                             </section>
                             <section class="boton-conoce">
-                                <p><a href="#" class="btn btn-success" role="button">Conoce más</a></p>
+                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
                             </section>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                                 </section>
                             </section>
                             <section class="boton-conoce">
-                                <p><a href="#" class="btn btn-success" role="button">Conoce más</a></p>
+                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
                             </section>
                         </div>
                     </div>
@@ -234,8 +234,8 @@
         </div><!-- Fin Filtro-->
     </div><!-- Fin fila -->
 </div><!-- Fin container-->  
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<!-- Modal Detalle-->
+<div class="modal fade bs-example-modal-lg" id="detalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">      
             <section id="panel-modal">
@@ -246,8 +246,8 @@
                 </div>
                 <div class="modal-body">
                     <section class="row">
-                        <section class="col-md-6">
-                            <img src="Files/img/casa6.jpg" alt="...">
+                        <section class="col-md-4">
+                            <img src="Files/img/casa1.jpg" alt="...">
                             <div class="caption">
                                 <h3>Terrazas del Claro</h3>                            
                                 <div class="precio">
@@ -268,12 +268,12 @@
                                     </section>
                                 </section>
                                 <section class="boton-conoce">
-                                    <p><a href="#" class="btn btn-success" role="button">Consultar</a></p>
+                                    <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#consulta">Consultar</button></p>     
                                 </section>
                             </div>
                         </section>
-                        <section class="col-md-6">
-                            
+                        <section class="col-md-8">
+                            <h4>Caracteristicas tecnicas</h4>
                         </section>
                     </section>
                 </div>
@@ -284,16 +284,47 @@
             </section>
         </div>
     </div>
-</div>
-
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+</div><!-- END Modal Detalle -->
+<!-- Modal Consulta-->
+<div class="modal fade bs-example-modal-sm" id="consulta" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            My Small Modal Label      
+            <section id="panel-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <img src="Files/img/logo.jpg" width="120px">
+                    <!--<h4 class="modal-title" id="exampleModalLabel">Nombre Modelo</h4> -->
+                </div>
+                <div class="modal-body">
+                    <section class="row">
+                        <section class="col-md-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Nombre</label>
+                                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFono1">Fono</label>
+                                    <input type="tel" class="form-control" id="exampleInputFono1" placeholder="Telefono">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputDetalle1">Consulta</label>
+                                    <textarea type="text" class="form-control" id="exampleInputDetalle1" rows="5"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-default">Enviar</button>
+                            </form>  
+                        </section>
+                    </section>
+                </div>
+            </section>
         </div>
     </div>
 </div>
-
+<!-- END Modal Consulta-->
 <script type="text/javascript">
     function cargarModal(id) {
         console.log("Cargando..");

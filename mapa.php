@@ -1,32 +1,38 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
     <head>
-        <meta charset="utf-8">
-        <title>jQuery UI Slider - Range slider</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script>
-            $(function () {
-                $("#slider-range").slider({
-                    range: true,
-                    min: 0,
-                    max: 500,
-                    values: [75, 300],
-                    slide: function (event, ui) {
-                        $("#amount").val("$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ]);
-                    }
-                });
-                $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-            });
-        </script>
+        <title>Ejemplo TinyMCE</title>
+        <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+        <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
     </head>
+
     <body>
-        <p>
-            <label for="amount">Price range:</label>
-            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-        </p>
-        <div id="slider-range"></div>
+        <div id="sample">
+            <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
+            //<![CDATA[
+            bkLib.onDomLoaded(function () {
+                nicEditors.allTextAreas()
+            });
+            //]]>
+            </script>
+            <h4>
+                First Textarea
+            </h4>
+            <textarea name="area1" cols="40">
+            </textarea><br />
+            <h4>
+                Second Textarea
+            </h4>
+            <textarea name="area2" style="width: 100%;">
+       Some Initial Content was in this textarea
+            </textarea><br />
+            <h4>
+                Third Textarea
+            </h4>
+            <textarea name="area3" style="width: 300px; height: 100px;">
+       HTML content default in textarea
+            </textarea>
+        </div>
     </body>
 </html>
