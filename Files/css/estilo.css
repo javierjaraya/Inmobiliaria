@@ -1,0 +1,83 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 05-11-2015, 20:40:51
+    Author     : Javier
+*/
+
+.logo{
+    height: 110px;
+}
+.sociales{
+    height: 110px;
+    text-align: right;    
+}
+
+.sociales #facebook{
+    position:absolute;
+    bottom:5px;
+    right:10px;    
+}
+.sociales #twitter{
+    position:absolute;
+    bottom:5px;
+    right:45px;    
+}
+.menu:after {
+    position: absolute;
+    bottom: -9px;
+    left: -16px;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 16px solid transparent;
+    border-right: 16px solid #4C9202;
+    content: "";
+}
+.menu:before {
+    position: absolute;
+    right: -20px;
+    top: 39px;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid #4C9202;
+    border-right: 20px solid transparent;
+    content: "";  
+}
+
+.carrucel{
+    height: auto;    
+}
+#contenedor-footer{
+    -webkit-box-shadow: inset 1px 61px 34px -53px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 1px 61px 34px -53px rgba(0,0,0,0.75);
+    box-shadow: inset 1px 61px 34px -53px rgba(0,0,0,0.75);
+}
+.footer{
+    color: #fff;    
+    height: auto;    
+    font-family: "Trebuchet MS",sans-serif;
+    font-size: 13px;
+    font-style: inherit;
+    font-weight: inherit;
+}
+.columna-footer{
+    padding: 17px;
+}
+.columna-footer a{    
+    color: #fff;
+}
+.columna-footer ul{
+    list-style: none;
+}
+.formulario-contacto{
+    padding: 1px 40px 40px 40px;
+}
