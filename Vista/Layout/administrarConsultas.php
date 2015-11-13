@@ -1,6 +1,23 @@
 <?php include 'header.php'; ?>
 
-
+<div class="container">
+    <section class="row">
+        <section class="col-md-12 tabla-principal">
+            <div class="table-responsive">
+                <table data-toggle="table" data-url="../Servlet/administrarConsulta.php?accion=LISTADO">
+                    <thead>
+                        <tr>
+                            <th data-field="nombre">Run</th>
+                            <th data-field="fono">Clave</th>
+                            <th data-field="email">ID Perfil</th>
+                            <th data-field="consulta">ID Perfil</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </section>
+    </section>
+</div>
 
 <!-- Administracion-->
 <script src="../../files/js/validarut.js"></script>

@@ -7,6 +7,9 @@ class PersonasDTO {
     public $telefono;
     public $fechaNac;
     public $direccion;
+    public $clave;
+    public $idPerfil;
+    public $nombrePerfil;
 
     public function PersonasDTO(){
     }
@@ -66,5 +69,28 @@ class PersonasDTO {
     function setDireccion($direccion) {
         return $this->direccion = $direccion;
     }
+    
+    function getClave() {
+        return $this->clave;
+    }
 
+    function getIdPerfil() {
+        return $this->idPerfil;
+    }
+
+    function getNombrePerfil() {
+        return $this->nombrePerfil;
+    }
+
+    function setClave($clave) {
+        $this->clave = $clave;
+    }
+
+    function setIdPerfil($idPerfil) {
+        $this->idPerfil = $idPerfil;
+    }
+
+    function setNombrePerfil($nombrePerfil) {
+        $this->nombrePerfil = $nombrePerfil;
+    }
 }

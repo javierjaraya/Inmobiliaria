@@ -19,16 +19,29 @@ and open the template in the editor.
                 $('.bxslider').bxSlider({
                     auto: true,
                     autoControls: false
-                });               
+                });
             });
         </script>
-        
+
         <!-- BOOTSTRAP Latest compiled and minified CSS -->
         <link rel="stylesheet" href="../../Files/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!-- BOOTSTRAP Optional theme -->
         <!--<link rel="stylesheet" href="Files/plugins/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" crossorigin="anonymous">-->
         <!-- BOOTSTRAP Latest compiled and minified JavaScript -->
         <script src="../../Files/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>  
+        <!-- BOOTSTRAP TABLE Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
+        <!-- BOOTSTRAP TABLE Latest compiled and minified JavaScript -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+        <!-- BOOTSTRAP TABLE  Latest compiled and minified Locales -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
+        
+        <!-- Data Table-->
+        <!--
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/s/bs-3.3.5/dt-1.10.10/datatables.min.js"></script>
+        -->
+
         <!-- GOOGLE MAPS -->
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>    
         <link rel="stylesheet" href="../../Files/css/estilo.css">

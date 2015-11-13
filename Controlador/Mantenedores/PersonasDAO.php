@@ -19,7 +19,7 @@ class PersonasDAO{
 
     public function findAll() {
         $this->conexion->conectar();
-        $query = "SELECT * FROM personas";
+        $query = "SELECT * FROM personas P JOIN usuario U ON P.run = U.run JOIN perfil PE ON U.idPerfil = PE.idPerfil";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
         $personass = array();
@@ -32,6 +32,9 @@ class PersonasDAO{
             $personas->setTelefono($fila['telefono']);
             $personas->setFechaNac($fila['fechaNac']);
             $personas->setDireccion($fila['direccion']);
+            $personas->setClave($fila['clave']);
+            $personas->setIdPerfil($fila['idPerfil']);
+            $personas->setNombrePerfil($fila['nombre']);
             $personass[$i] = $personas;
             $i++;
         }
