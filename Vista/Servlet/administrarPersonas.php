@@ -18,6 +18,9 @@ if ($accion != null) {
         $telefono = htmlspecialchars($_REQUEST['telefono']);
         $fechaNac = htmlspecialchars($_REQUEST['fechaNac']);
         $direccion = htmlspecialchars($_REQUEST['direccion']);
+        $clave = htmlspecialchars($_REQUEST['clave']);
+        $email = htmlspecialchars($_REQUEST['email']);
+        $idPerfil = htmlspecialchars($_REQUEST['idPerfil']);
 
         $object = $control->getPersonasByID($run);
         if (($object->getRun() == null || $object->getRun() == "")) {
@@ -29,8 +32,20 @@ if ($accion != null) {
             $personas->setTelefono($telefono);
             $personas->setFechaNac($fechaNac);
             $personas->setDireccion($direccion);
+            $personas->setClave($clave);
+            $personas->setEmail($email);
+            $personas->setIdPerfil($idPerfil);
+
+            $usuario = new UsuarioDTO();
+            $usuario->setIdPerfil($idPerfil);
+            $usuario->setRun($run);
+            $usuario->setClave($clave);
 
             $result = $control->addPersonas($personas);
+
+            if ($result) {
+                $result = $control->addUsuario($usuario);
+            }
 
             if ($result) {
                 echo json_encode(array(
@@ -38,6 +53,7 @@ if ($accion != null) {
                     'mensaje' => "Personas ingresada correctamente"
                 ));
             } else {
+                $control->removePersonas($run);
                 echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
             }
         } else {
@@ -71,17 +87,31 @@ if ($accion != null) {
         $telefono = htmlspecialchars($_REQUEST['telefono']);
         $fechaNac = htmlspecialchars($_REQUEST['fechaNac']);
         $direccion = htmlspecialchars($_REQUEST['direccion']);
+        $clave = htmlspecialchars($_REQUEST['clave']);
+        $email = htmlspecialchars($_REQUEST['email']);
+        $idPerfil = htmlspecialchars($_REQUEST['idPerfil']);
 
-            $personas = new PersonasDTO();
-            $personas->setRun($run);
-            $personas->setNombres($nombres);
-            $personas->setApellidos($apellidos);
-            $personas->setSexo($sexo);
-            $personas->setTelefono($telefono);
-            $personas->setFechaNac($fechaNac);
-            $personas->setDireccion($direccion);
+        $runRespaldo = htmlspecialchars($_REQUEST['runRespaldo']);
+
+        $personas = new PersonasDTO();
+        $personas->setRun($run);
+        $personas->setNombres($nombres);
+        $personas->setApellidos($apellidos);
+        $personas->setSexo($sexo);
+        $personas->setTelefono($telefono);
+        $personas->setFechaNac($fechaNac);
+        $personas->setDireccion($direccion);
+        $personas->setClave($clave);
+        $personas->setEmail($email);
+        $personas->setIdPerfil($idPerfil);
+
+        $usuario = new UsuarioDTO();
+        $usuario->setIdPerfil($idPerfil);
+        $usuario->setRun($run);
+        $usuario->setClave($clave);
 
         $result = $control->updatePersonas($personas);
+        $control->updateUsuario($usuario);
         if ($result) {
             echo json_encode(array(
                 'success' => true,

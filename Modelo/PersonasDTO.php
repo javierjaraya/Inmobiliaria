@@ -8,6 +8,7 @@ class PersonasDTO {
     public $fechaNac;
     public $direccion;
     public $clave;
+    public $email;
     public $idPerfil;
     public $nombrePerfil;
 
@@ -85,7 +86,15 @@ class PersonasDTO {
     function setClave($clave) {
         $this->clave = $clave;
     }
+    
+    function getEmail() {
+        return $this->email;
+    }
 
+    function setEmail($email) {
+        $this->email = $email;
+    }
+    
     function setIdPerfil($idPerfil) {
         $this->idPerfil = $idPerfil;
     }

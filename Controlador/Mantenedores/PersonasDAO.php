@@ -32,6 +32,7 @@ class PersonasDAO{
             $personas->setTelefono($fila['telefono']);
             $personas->setFechaNac($fila['fechaNac']);
             $personas->setDireccion($fila['direccion']);
+            $personas->setEmail($fila['email']);
             $personas->setClave($fila['clave']);
             $personas->setIdPerfil($fila['idPerfil']);
             $personas->setNombrePerfil($fila['nombre']);
@@ -44,7 +45,7 @@ class PersonasDAO{
 
     public function findByID($run) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM personas WHERE  run = '".$run."' ";
+        $query = "SELECT * FROM personas P JOIN usuario U ON P.run = U.run JOIN perfil PE ON U.idPerfil = PE.idPerfil WHERE  P.run = '".$run."' ";
         $result = $this->conexion->ejecutar($query);
         $personas = new PersonasDTO();
         while ($fila = mysql_fetch_assoc($result)) {
@@ -55,6 +56,10 @@ class PersonasDAO{
             $personas->setTelefono($fila['telefono']);
             $personas->setFechaNac($fila['fechaNac']);
             $personas->setDireccion($fila['direccion']);
+            $personas->setEmail($fila['email']);
+            $personas->setClave($fila['clave']);
+            $personas->setIdPerfil($fila['idPerfil']);
+            $personas->setNombrePerfil($fila['nombre']);
         }
         $this->conexion->desconectar();
         return $personas;
@@ -62,7 +67,7 @@ class PersonasDAO{
 
     public function findLikeAtrr($cadena) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM personas WHERE  upper(run) LIKE upper('".$cadena."')  OR  upper(nombres) LIKE upper('".$cadena."')  OR  upper(apellidos) LIKE upper('".$cadena."')  OR  upper(sexo) LIKE upper('".$cadena."')  OR  upper(telefono) LIKE upper(".$cadena.")  OR  upper(fechaNac) LIKE upper('".$cadena."')  OR  upper(direccion) LIKE upper('".$cadena."') ";
+        $query = "SELECT * FROM personas P JOIN usuario U ON P.run = U.run JOIN perfil PE ON U.idPerfil = PE.idPerfil WHERE  upper(P.run) LIKE upper('".$cadena."')  OR  upper(P.nombres) LIKE upper('".$cadena."')  OR  upper(P.apellidos) LIKE upper('".$cadena."')  OR  upper(P.sexo) LIKE upper('".$cadena."')  OR  upper(P.telefono) LIKE upper(".$cadena.")  OR  upper(P.fechaNac) LIKE upper('".$cadena."')  OR  upper(P.direccion) LIKE upper('".$cadena."') ";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
         $personass = array();
@@ -75,6 +80,10 @@ class PersonasDAO{
             $personas->setTelefono($fila['telefono']);
             $personas->setFechaNac($fila['fechaNac']);
             $personas->setDireccion($fila['direccion']);
+            $personas->setEmail($fila['email']);
+            $personas->setClave($fila['clave']);
+            $personas->setIdPerfil($fila['idPerfil']);
+            $personas->setNombrePerfil($fila['nombre']);
             $personass[$i] = $personas;
             $i++;
         }
@@ -84,8 +93,8 @@ class PersonasDAO{
 
     public function save($personas) {
         $this->conexion->conectar();
-        $query = "INSERT INTO personas (run,nombres,apellidos,sexo,telefono,fechaNac,direccion)"
-                . " VALUES ('".$personas->getRun()."' , '".$personas->getNombres()."' , '".$personas->getApellidos()."' , '".$personas->getSexo()."' ,  ".$personas->getTelefono()." , '".$personas->getFechaNac()."' , '".$personas->getDireccion()."' )";
+        $query = "INSERT INTO personas (run,nombres,apellidos,sexo,telefono,fechaNac,direccion,email)"
+                . " VALUES ('".$personas->getRun()."' , '".$personas->getNombres()."' , '".$personas->getApellidos()."' , '".$personas->getSexo()."' ,  ".$personas->getTelefono()." , '".$personas->getFechaNac()."' , '".$personas->getDireccion()."', '".$personas->getEmail()."' )";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
@@ -99,7 +108,8 @@ class PersonasDAO{
                 . "  sexo = '".$personas->getSexo()."' ,"
                 . "  telefono =  ".$personas->getTelefono()." ,"
                 . "  fechaNac = '".$personas->getFechaNac()."' ,"
-                . "  direccion = '".$personas->getDireccion()."' "
+                . "  direccion = '".$personas->getDireccion()."' ,"
+                . "  email = '".$personas->getEmail()."' "
                 . " WHERE  run = '".$personas->getRun()."' ";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
