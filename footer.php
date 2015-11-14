@@ -50,7 +50,7 @@
                 <div class="modal-body">
                     <section class="row">
                         <section class="col-md-12">
-                            <form id="fm" method="post" novalidate>
+                            <form id="fm-login" method="post" novalidate>
                                 <div class="form-group">
                                     <label for="InputRut">Run:</label>
                                     <input type="text" class="form-control" id="InputRun" name="InputRun" placeholder="112223339 ">
@@ -71,13 +71,14 @@
     </div>
 </div><!-- END MODAL LOGIN-->
 <!-- MODAL MENSAJE-->
-<div class="modal fade bs-example-modal-sm" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade bs-example-modal-sm" id="dg-mensaje" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <section id="panel-modal">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <img id="logo-mensaje" src="Files/img/logo.jpg" width="30px">
+                    <label class="titulo-modal"><h4 class="modal-title" id="titulo-mensaje"></h4></label>
                 </div>
                 <div class="modal-body">
                     <section class="row">
@@ -94,18 +95,17 @@
 </div><!-- END MODAL MENSAJE-->
 <script type="text/javascript">
     function validarLogin() {
-        $('#fm').form('submit', {
+        $('#fm-login').form('submit', {
             url: "Vista/Servlet/login.php",
             onSubmit: function () {
                 return $(this).form('validate');
             },
             success: function (result) {
-                console.log(result);
                 var result = eval('(' + result + ')');                
                 if (!result.success) { //
                     document.getElementById('logo-mensaje').src = "Files/img/iconoInformacion.png";
                     $('#contenedor-mensaje').html(result.mensaje);
-                    $('#mensaje').modal(this)//CALL MODAL MENSAJE
+                    $('#dg-mensaje').modal(this)//CALL MODAL MENSAJE
                 } else {
                     location.href = result.pagina;
                 }

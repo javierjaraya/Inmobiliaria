@@ -167,3 +167,26 @@ and open the template in the editor.
     width: 200px;
     float: right;
 }
+.toolbar-visor{
+}
+.toolbar-visor label{
+    float: right;
+    padding-right: 20px;
+}
+.header-visor{
+    padding: 5px;
+    margin-bottom: 14px;
+}
+.body-visor{
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+    min-height: 100px;
+}
+#cont-mensajes {
+    margin-left: 3px;
+    color: #337ab7;
+    background-color: #fff;
+}

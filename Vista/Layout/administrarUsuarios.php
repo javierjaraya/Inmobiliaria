@@ -172,7 +172,7 @@
     </div><!-- END MODAL CONFIRMACION-->
 </div>
 <!-- Administracion-->
-<script src="../../files/js/validarut.js"></script>
+<script src="../../Files/js/validarut.js"></script>
 <script type="text/javascript">
                             $(document).ready(function () {
                                 cargarDatos();
@@ -258,6 +258,8 @@
                                     mensaje('Error', "Hay casillas vacias o con valores invalidos.");
                                 }
                             }
+                            
+                            
 
                             function borrar(id) {
                                 confirmacion('Confirmacion', '¿Esta seguro?, una vez eliminado no se podran recuperar los datos.');

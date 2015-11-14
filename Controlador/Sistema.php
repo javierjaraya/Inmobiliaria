@@ -160,7 +160,11 @@ class Sistema {
     public function getMensajeLikeAtrr($cadena) {
         return $this->mensajeDAO->findLikeAtrr($cadena);
     }
-
+    
+    public function getCantidadNuevosMensajes(){
+        return $this->mensajeDAO->cantidadMensajesNuevos();
+    }
+    
     public function getAllPerfils() {
         return $this->perfilDAO->findAll();
     }

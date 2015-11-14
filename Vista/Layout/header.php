@@ -35,7 +35,7 @@ and open the template in the editor.
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
         <!-- BOOTSTRAP TABLE  Latest compiled and minified Locales -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
-        
+
         <!-- Data Table-->
         <!--
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
@@ -45,6 +45,28 @@ and open the template in the editor.
         <!-- GOOGLE MAPS -->
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>    
         <link rel="stylesheet" href="../../Files/css/estilo.css">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                actualizarCantidadNuevosMensajes();
+            });
+
+            function actualizarCantidadNuevosMensajes() {
+                var url_json = '../Servlet/administrarMensaje.php?accion=N_NUEVOS_MENSAJES';
+                $.getJSON(
+                        url_json,
+                        function (datos) {
+                            var visor = document.getElementById('cont-mensajes');
+                            
+                            if(datos.cantidad>0){
+                                $('#cont-mensajes').html(datos.cantidad);
+                                visor.style.display = 'inline';
+                            }else{
+                                visor.style.display = 'none';
+                            }
+                        }
+                );
+            }
+        </script>
     </head>
     <body>
         <!-- Docs master nav -->
@@ -86,7 +108,7 @@ and open the template in the editor.
                                 <li><a href='administrarContactanos.php'>Contactanos</a></li>
                                 <li><a href='administrarUsuarios.php'>Usuarios</a></li>
                                 <li><a href='administrarConsultas.php'>Consultas</a></li>
-                                <li><a href='administrarMensajes.php'>Mensajes</a></li>
+                                <li><a href='administrarMensajes.php'>Mensajes<span id="cont-mensajes"class="badge"></span></a></li>
                             </ul>
                         </div>
                     </nav>

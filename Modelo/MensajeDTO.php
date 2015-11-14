@@ -1,6 +1,7 @@
 <?php
 class MensajeDTO {
     public $idMensaje;
+    public $fecha;
     public $nombre;
     public $email;
     public $fono;
@@ -18,7 +19,15 @@ class MensajeDTO {
     function setIdMensaje($idMensaje) {
         return $this->idMensaje = $idMensaje;
     }
+    
+    function getFecha() {
+        return $this->fecha;
+    }
 
+    function setFecha($fecha) {
+        $this->fecha = $fecha;
+    }
+    
     function getNombre() {
         return $this->nombre;
     }

@@ -11,37 +11,29 @@ if ($accion != null) {
         $json = json_encode($mensajes);
         echo $json;
     } else if ($accion == "AGREGAR") {
-        $idMensaje = htmlspecialchars($_REQUEST['idMensaje']);
         $nombre = htmlspecialchars($_REQUEST['nombre']);
         $email = htmlspecialchars($_REQUEST['email']);
-        $fono = htmlspecialchars($_REQUEST['fono']);
+        $fono = htmlspecialchars($_REQUEST['telefono']);
         $asunto = htmlspecialchars($_REQUEST['asunto']);
-        $mensaje = htmlspecialchars($_REQUEST['mensaje']);
-        $visto = htmlspecialchars($_REQUEST['visto']);
+        $detalle = htmlspecialchars($_REQUEST['detalle']);
 
-        $object = $control->getMensajeByID($idMensaje);
-        if (($object->getIdMensaje() == null || $object->getIdMensaje() == "")) {
-            $mensaje = new MensajeDTO();
-            $mensaje->setIdMensaje($idMensaje);
-            $mensaje->setNombre($nombre);
-            $mensaje->setEmail($email);
-            $mensaje->setFono($fono);
-            $mensaje->setAsunto($asunto);
-            $mensaje->setMensaje($mensaje);
-            $mensaje->setVisto($visto);
+        $mensaje = new MensajeDTO();
+        $mensaje->setNombre($nombre);
+        $mensaje->setEmail($email);
+        $mensaje->setFono($fono);
+        $mensaje->setAsunto($asunto);
+        $mensaje->setMensaje($detalle);
+        $mensaje->setVisto(0);
 
-            $result = $control->addMensaje($mensaje);
+        $result = $control->addMensaje($mensaje);
 
-            if ($result) {
-                echo json_encode(array(
-                    'success' => true,
-                    'mensaje' => "Mensaje ingresada correctamente"
-                ));
-            } else {
-                echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
-            }
+        if ($result) {
+            echo json_encode(array(
+                'success' => true,
+                'mensaje' => "Mensaje enviado correctamente"
+            ));
         } else {
-            echo json_encode(array('errorMsg' => 'El o la mensaje ya existe, intento nuevamente.'));
+            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
         }
     } else if ($accion == "BORRAR") {
         $idMensaje = htmlspecialchars($_REQUEST['idMensaje']);
@@ -72,14 +64,14 @@ if ($accion != null) {
         $mensaje = htmlspecialchars($_REQUEST['mensaje']);
         $visto = htmlspecialchars($_REQUEST['visto']);
 
-            $mensaje = new MensajeDTO();
-            $mensaje->setIdMensaje($idMensaje);
-            $mensaje->setNombre($nombre);
-            $mensaje->setEmail($email);
-            $mensaje->setFono($fono);
-            $mensaje->setAsunto($asunto);
-            $mensaje->setMensaje($mensaje);
-            $mensaje->setVisto($visto);
+        $mensaje = new MensajeDTO();
+        $mensaje->setIdMensaje($idMensaje);
+        $mensaje->setNombre($nombre);
+        $mensaje->setEmail($email);
+        $mensaje->setFono($fono);
+        $mensaje->setAsunto($asunto);
+        $mensaje->setMensaje($mensaje);
+        $mensaje->setVisto($visto);
 
         $result = $control->updateMensaje($mensaje);
         if ($result) {
@@ -90,5 +82,28 @@ if ($accion != null) {
         } else {
             echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
         }
+    } else if ($accion == "MARCAR_VISTO") {
+        $idMensaje = htmlspecialchars($_REQUEST['idMensaje']);
+
+        $mensaje = $control->getMensajeByID($idMensaje);
+        $mensaje->setVisto(1);
+
+        $result = $control->updateMensaje($mensaje);
+        if ($result) {
+            echo json_encode(array(
+                'success' => true,
+                'mensaje' => "Mensaje actualizada correctamente"
+            ));
+        } else {
+            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+        }
+    } else if ($accion == "N_NUEVOS_MENSAJES") { {
+            $cantidad = $control->getCantidadNuevosMensajes();
+            echo json_encode(array(
+                'success' => true,
+                'cantidad' => $cantidad
+            ));
+        }
     }
 }
+    
