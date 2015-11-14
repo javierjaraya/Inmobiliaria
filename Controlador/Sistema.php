@@ -2,6 +2,7 @@
 
 include_once 'Mantenedores/CasaDAO.php';
 include_once 'Mantenedores/ConsultaDAO.php';
+include_once 'Mantenedores/EmpresaDAO.php';
 include_once 'Mantenedores/EspecificacionDAO.php';
 include_once 'Mantenedores/ImagenDAO.php';
 include_once 'Mantenedores/MensajeDAO.php';
@@ -11,9 +12,11 @@ include_once 'Mantenedores/PlanoDAO.php';
 include_once 'Mantenedores/UsuarioDAO.php';
 
 class Sistema {
+
     private static $instancia = NULL;
     private $casaDAO;
     private $consultaDAO;
+    private $empresaDAO;
     private $especificacionDAO;
     private $imagenDAO;
     private $mensajeDAO;
@@ -25,6 +28,7 @@ class Sistema {
     public function Sistema() {
         $this->casaDAO = new CasaDAO();
         $this->consultaDAO = new ConsultaDAO();
+        $this->empresaDAO = new EmpresaDAO();
         $this->especificacionDAO = new EspecificacionDAO();
         $this->imagenDAO = new ImagenDAO();
         $this->mensajeDAO = new MensajeDAO();
@@ -87,6 +91,30 @@ class Sistema {
 
     public function getConsultaLikeAtrr($cadena) {
         return $this->consultaDAO->findLikeAtrr($cadena);
+    }
+    
+    public function getAllEmpresas() {
+        return $this->empresaDAO->findAll();
+    }
+
+    public function addEmpresa($empresa) {
+        return $this->empresaDAO->save($empresa);
+    }
+
+    public function removeEmpresa($idEmpresa) {
+        return $this->empresaDAO->delete($idEmpresa);
+    }
+
+    public function updateEmpresa($empresa) {
+        return $this->empresaDAO->update($empresa);
+    }
+
+    public function getEmpresaByID($idEmpresa) {
+        return $this->empresaDAO->findByID($idEmpresa);
+    }
+
+    public function getEmpresaLikeAtrr($cadena) {
+        return $this->empresaDAO->findLikeAtrr($cadena);
     }
 
     public function getAllEspecificacions() {
@@ -160,11 +188,11 @@ class Sistema {
     public function getMensajeLikeAtrr($cadena) {
         return $this->mensajeDAO->findLikeAtrr($cadena);
     }
-    
-    public function getCantidadNuevosMensajes(){
+
+    public function getCantidadNuevosMensajes() {
         return $this->mensajeDAO->cantidadMensajesNuevos();
     }
-    
+
     public function getAllPerfils() {
         return $this->perfilDAO->findAll();
     }
@@ -262,4 +290,5 @@ class Sistema {
     }
 
 }
+
 ?>

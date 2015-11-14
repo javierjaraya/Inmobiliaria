@@ -44,6 +44,7 @@ and open the template in the editor.
 
         <!-- GOOGLE MAPS -->
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>    
+        
         <link rel="stylesheet" href="../../Files/css/estilo.css">
         <script type="text/javascript">
             $(document).ready(function () {
