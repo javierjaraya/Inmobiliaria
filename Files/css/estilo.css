@@ -163,3 +163,7 @@ and open the template in the editor.
     padding-left: 20px;
     padding-bottom: 0px;
 }
+.toalbar-table input{
+    width: 200px;
+    float: right;
+}

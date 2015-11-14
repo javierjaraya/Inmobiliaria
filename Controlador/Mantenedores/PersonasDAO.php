@@ -67,7 +67,7 @@ class PersonasDAO{
 
     public function findLikeAtrr($cadena) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM personas P JOIN usuario U ON P.run = U.run JOIN perfil PE ON U.idPerfil = PE.idPerfil WHERE  upper(P.run) LIKE upper('".$cadena."')  OR  upper(P.nombres) LIKE upper('".$cadena."')  OR  upper(P.apellidos) LIKE upper('".$cadena."')  OR  upper(P.sexo) LIKE upper('".$cadena."')  OR  upper(P.telefono) LIKE upper(".$cadena.")  OR  upper(P.fechaNac) LIKE upper('".$cadena."')  OR  upper(P.direccion) LIKE upper('".$cadena."') ";
+        $query = "SELECT * FROM personas P JOIN usuario U ON P.run = U.run JOIN perfil PE ON U.idPerfil = PE.idPerfil WHERE  upper(P.run) LIKE upper('%".$cadena."%')  OR  upper(P.nombres) LIKE upper('%".$cadena."%')  OR  upper(P.apellidos) LIKE upper('%".$cadena."%') OR  upper(P.direccion) LIKE upper('%".$cadena."%') ";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
         $personass = array();

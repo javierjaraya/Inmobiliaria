@@ -4,6 +4,7 @@
         <section class="col-md-12 tabla-principal">
             <section class="toalbar-table">
                 <button class="btn btn-success btn-sm glyphicon glyphicon glyphicon-plus" onClick="agregar()"></button>
+                <input type="text" class="form-control" placeholder="Buscar" id="inputBuscar" name="inputBuscar" onKeyUp="buscarUsuario()">
             </section>
             <div class="table-responsive">
                 <table id="tabla" name="table" class="table table-hover table table-striped table-bordered bootstrap-datatable dataTable" data-toggle="table"><!-- data-url="../Servlet/administrarUsuario.php?accion=LISTADO"> -->
@@ -276,6 +277,38 @@
                                 }, 'json');
                             }
 
+                            function buscarUsuario() {
+                                var cadena = document.getElementById("inputBuscar").value;
+                                var url_json = '../Servlet/administrarPersonas.php?accion=BUSCAR&cadena=' + cadena;
+                                $.getJSON(
+                                        url_json,
+                                        function (datos) {
+                                            $("#body-table").empty();
+                                            var i = 0;
+                                            $.each(datos, function (k, v) {
+                                                var contenido = "<tr>";
+                                                contenido += "<td>" + v.run + "</td>";
+                                                contenido += "<td>" + v.nombres + "</td>";
+                                                contenido += "<td>" + v.apellidos + "</td>";
+                                                contenido += "<td>" + v.sexo + "</td>";
+                                                contenido += "<td>" + v.telefono + "</td>";
+                                                contenido += "<td>" + v.fechaNac + "</td>";
+                                                contenido += "<td>" + v.direccion + "</td>";
+                                                contenido += "<td>" + v.email + "</td>";
+                                                contenido += "<td>" + v.clave + "</td>";
+                                                contenido += "<td>" + v.nombrePerfil + "</td>";
+                                                contenido += "<td>";
+                                                contenido += "<button class='btn btn-warning btn-sm glyphicon glyphicon-pencil' onclick='editar(" + v.run + ")'></button>";
+                                                contenido += "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='borrar(" + v.run + ")'></button>";
+                                                contenido += "</td>";
+                                                contenido += "</tr>";
+                                                $("#body-table").append(contenido);
+                                                i++;
+                                            });
+                                        }
+                                );
+                            }
+                            
                             function validarFormulario() {
                                 var run = document.getElementById('run').value;
                                 var nombres = document.getElementById('nombres').value;
@@ -443,20 +476,6 @@
                                 $('#idPerfilIco').removeClass('glyphicon-remove');
                                 $('#idPerfilGroup').removeClass('has-success');
                                 $('#idPerfilIco').removeClass('glyphicon-ok');
-                            }
-
-
-                            function buscarEmpleado() {
-                                var nombres = document.getElementById("inputBuscarEmpleado").value;
-                                var parm = "";
-                                parm = parm + "&nombres=" + nombres;
-                                var url_json = '../Servlet/administrarEmpleados.php?accion=BUSCAR' + parm;
-                                $.getJSON(
-                                        url_json,
-                                        function (datos) {
-                                            $('#dg').datagrid('loadData', datos);
-                                        }
-                                );
                             }
 
                             function mensaje(titulo, mensaje) {
