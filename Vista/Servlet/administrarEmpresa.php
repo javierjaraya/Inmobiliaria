@@ -95,5 +95,22 @@ if ($accion != null) {
         } else {
             echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
         }
+    } else if ($accion == "ACTUALIZAR_EMPRESA") {
+        $quienesSomos = $_REQUEST['contenido'];
+
+        $empresa = $control->getEmpresaByID(1);
+        
+        $empresa->setQuienesSomos($quienesSomos);
+
+        $result = $control->updateEmpresa($empresa);
+        
+        if ($result) {
+            echo json_encode(array(
+                'success' => true,
+                'mensaje' => "Empresa actualizada correctamente"
+            ));
+        } else {
+            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+        }
     }
 }

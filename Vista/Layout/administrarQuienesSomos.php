@@ -1,104 +1,99 @@
 <?php include 'header.php'; ?>
+<!-- NIC EDIT editor de texto-->
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<div class="container">
+    <section class="row">
+        <section class="col-md-12 tabla-principal">
+            <h4>
+                Nuestra Empresa
+            </h4>
+            <textarea id="areaTexto" name="area" rows="14" class="form-control"> </textarea>
+            <button type="button" class="btn btn-success" onclick="actualizar()">Actualizar</button>
+        </section>
+    </section>
 
+    <!-- MODAL MENSAJE-->
+    <div class="modal fade bs-example-modal-sm" id="dg-mensaje" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <section id="panel-modal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img id="logo-mensaje" src="../../Files/img/logo.jpg" width="30px">
+                        <label class="titulo-modal"><h4 class="modal-title" id="titulo-mensaje"></h4></label>
+                    </div>
+                    <div class="modal-body">
+                        <section class="row">
+                            <section class="col-md-12">
+                                <div id="contenedor-mensaje">
 
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div><!-- END MODAL MENSAJE-->
+</div>
 
-<!-- Administracion-->
-<script src="../../files/js/validarut.js"></script>
-
-<script>
-        function crearEmpleado() {
-            document.getElementById("fm").reset();
-            run.disabled = false;//Activamos
-            $('#dlg').dialog('open').dialog('setTitle', 'Crear Persona');
-            document.getElementById('accion').value = "AGREGAR";
+<script type="text/javascript">
+    var areaTexto;
+    //<![CDATA[
+    bkLib.onDomLoaded(function () {
+        cargarDatos();       
+    });
+    //]]>
+    function toggleArea1() {
+        if (!areaTexto) {
+            areaTexto = new nicEditor({fullPanel: true}).panelInstance('areaTexto', {hasPanel: true});
         }
+    }
 
-        function guardarEmpleado() {
-            if (validar()) {
-                $('#fm').form('submit', {
-                    url: "../Servlet/administrarEmpleados.php",
-                    onSubmit: function () {
-                        return $(this).form('validate');
-                    },
-                    success: function (result) {
-                        var result = eval('(' + result + ')');
-                        if (result.errorMsg) {
-                            $.messager.alert('Error', result.errorMsg);
-                        } else {
-                            $('#dlg').dialog('close');        // close the dialog
-                            $('#dg').datagrid('reload');    // reload the user data
-                            $.messager.show({
-                                title: 'Aviso',
-                                msg: result.mensaje
-                            });
-                        }
-                    }
-                });
-            }
+    function actualizar() {
+        areaTexto.removeInstance('areaTexto');
+        areaTexto = null;
+        var contenido = document.getElementById("areaTexto").value;
+        guardarCambios(contenido);
+        areaTexto = new nicEditor({fullPanel: true}).panelInstance('areaTexto', {hasPanel: true});
+    }
 
-        }
-        function eliminarEmpleado() {
-            var row = $('#dg').datagrid('getSelected');
-            if (row) {
-                $.messager.confirm('Confirmar', '¿Esta seguro de eliminar el empleado seleccionado?', function (r) {
-                    if (r) {//SI
-                        $.post('../Servlet/administrarEmpleados.php?accion=BORRAR', {run: row.run}, function (result) {
-                            if (result.success) {
-                                $('#dg').datagrid('reload');    // reload the user data
-                                $.messager.show({
-                                    title: 'Aviso',
-                                    msg: result.mensaje
-                                });
-                            } else {
-                                $.messager.show({// show error message
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
-                            }
-                        }, 'json');
-                    }
-                });
-            } else {
-                $.messager.alert('Alerta', 'Debe seleccionar un empleado a eliminar.');
-            }
-        }
-
-
-        function buscarEmpleado() {
-            var nombres = document.getElementById("inputBuscarEmpleado").value;
-            var parm = "";
-            parm = parm + "&nombres=" + nombres;
-
-            var url_json = '../Servlet/administrarEmpleados.php?accion=BUSCAR' + parm;
+    function cargarDatos() {
+        var url_json = '../Servlet/administrarEmpresa.php?accion=LISTADO';
+        $("#areaTexto").empty();
+        $.getJSON(
+                url_json,
+                function (data) {
+                    $('#areaTexto').html(data.quienesSomos);
+                    toggleArea1();
+                }
+        );
+    }
+    
+    function guardarCambios(contenido) {
+        if (contenido != null && contenido != "") {
+            var url_json = '../Servlet/administrarEmpresa.php?accion=ACTUALIZAR_EMPRESA&contenido=' + contenido;
             $.getJSON(
                     url_json,
-                    function (datos) {
-                        $('#dg').datagrid('loadData', datos);
+                    function (result) {
+                        if (result.success) {
+                            mensaje('Exito', result.mensaje);
+                        } else {
+                            mensaje('Error', result.errorMsg);
+                        }
                     }
             );
+        } else {
+            mensaje('Error', "Hay casillas vacias o con valores invalidos.");
         }
+    }
 
-        function editarEmpleado() {
-            document.getElementById("fm").reset();
-            var row = $('#dg').datagrid('getSelected');
-            if (row) {
-                $('#dlg').dialog('open').dialog('setTitle', 'Editar Empleado');
-                $('#runRespaldo').val(row.run);
-                $('#idPerfil').val(row.idPerfil);
-                $('#fm').form('load', row);
-                obtieneUsuario();
-                document.getElementById('accion').value = "ACTUALIZAR";
-            } else {
-                $.messager.alert('Alerta', 'Debe seleccionar un empleado a editar.');
-            }
-        }
+    function mensaje(titulo, mensaje) {
+        document.getElementById('logo-mensaje').src = "../../Files/img/iconoInformacion.png";
+        $('#titulo-mensaje').html(titulo);
+        $('#contenedor-mensaje').html(mensaje);
+        $('#dg-mensaje').modal(this)//CALL MODAL MENSAJE
+    }
 
-        function eliminarCaracteres(cadena) {
-            var aux = String(cadena);
-            aux = aux.replace('.', '');
-            aux = aux.replace('.', '');
-            aux = aux.replace('-', '');
-            return aux;
-        }
 </script>
 <?php include 'footer.php'; ?>

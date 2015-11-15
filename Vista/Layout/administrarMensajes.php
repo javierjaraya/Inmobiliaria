@@ -117,7 +117,7 @@
                                             $.each(data, function (k, v) {
                                                 var visto = ""
                                                 if (v.visto == 0) {
-                                                    visto = "success";
+                                                    visto = "info";
                                                 }
 
                                                 var contenido = "<tr class='" + visto + "' id='tr-" + v.idMensaje + "'>";
