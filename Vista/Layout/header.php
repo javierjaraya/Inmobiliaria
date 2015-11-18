@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <?php session_start();if($_SESSION["autentificado"] != "SI") header('Location: ../../index.php');?>
+<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates

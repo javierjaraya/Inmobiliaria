@@ -13,6 +13,12 @@ class Configuracion {
         $this->host = "localhost";
         $this->db = "inmobiliaria";
         $this->puerto = "";
+        
+        /* WEB
+        $this->user = "icibiobi_demo";
+        $this->password = "local8080";
+        $this->host = "localhost";
+        $this->db = "icibiobi_inmobiliaria";*/
     }
 
     public function getUser() {
