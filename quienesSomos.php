@@ -5,7 +5,6 @@
         <div id="contenido-empresa">
 
         </div>
-        <img src="Files/img/empresa.jpg">
     </div>
 </div>      
 

@@ -1,5 +1,6 @@
 <?php
 
+include_once 'Mantenedores/BannerDAO.php';
 include_once 'Mantenedores/CasaDAO.php';
 include_once 'Mantenedores/ConsultaDAO.php';
 include_once 'Mantenedores/EmpresaDAO.php';
@@ -14,6 +15,7 @@ include_once 'Mantenedores/UsuarioDAO.php';
 class Sistema {
 
     private static $instancia = NULL;
+    private $bannerDAO;
     private $casaDAO;
     private $consultaDAO;
     private $empresaDAO;
@@ -26,6 +28,7 @@ class Sistema {
     private $usuarioDAO;
 
     public function Sistema() {
+        $this->bannerDAO = new BannerDAO();
         $this->casaDAO = new CasaDAO();
         $this->consultaDAO = new ConsultaDAO();
         $this->empresaDAO = new EmpresaDAO();
@@ -43,6 +46,30 @@ class Sistema {
             self::$instancia = new Sistema();
         }
         return self::$instancia;
+    }
+    
+    public function getAllBanners() {
+        return $this->bannerDAO->findAll();
+    }
+
+    public function addBanner($banner) {
+        return $this->bannerDAO->save($banner);
+    }
+
+    public function removeBanner($idImagen) {
+        return $this->bannerDAO->delete($idImagen);
+    }
+
+    public function updateBanner($banner) {
+        return $this->bannerDAO->update($banner);
+    }
+
+    public function getBannerByID($idImagen) {
+        return $this->bannerDAO->findByID($idImagen);
+    }
+
+    public function getBannerLikeAtrr($cadena) {
+        return $this->bannerDAO->findLikeAtrr($cadena);
     }
 
     public function getAllCasas() {
