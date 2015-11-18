@@ -21,9 +21,9 @@ if (($run != null || $run != "") && ($clave != null || $clave != "")) {
             $_SESSION["run"] = $usuario->getRun();
 
             if ($usuario->getIdPerfil() == 1) {//administrador
-                $pagina = "Vista/Layout/administrarHome.php";
+                $pagina = "Vista/Layout/administrarHome";
             } else if ($usuario->getIdPerfil() == 2) {//Persona
-                $pagina = "Vista/Layout/administrarHome.php";
+                $pagina = "Vista/Layout/administrarHome";
             }
 
             $success = true;

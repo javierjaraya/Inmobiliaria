@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start();if($_SESSION["autentificado"] != "SI") header('Location: ../../index.php');?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -103,13 +104,13 @@ and open the template in the editor.
                              otro elemento que se pueda ocultar al minimizar la barra -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">                            
                             <ul class="nav navbar-nav navbar-right">
-                                <li> <!--class='active'--><a href='administrarHome.php'>Inicio</a></li>
-                                <li><a href='administrarModelos.php'>Modelos</a></li>
-                                <li><a href='administrarQuienesSomos.php'>Quienes Somos</a></li>
-                                <li><a href='administrarContactanos.php'>Contactanos</a></li>
-                                <li><a href='administrarUsuarios.php'>Usuarios</a></li>
-                                <li><a href='administrarConsultas.php'>Consultas</a></li>
-                                <li><a href='administrarMensajes.php'>Mensajes<span id="cont-mensajes"class="badge"></span></a></li>
+                                <li> <!--class='active'--><a href='administrarHome'>Inicio</a></li>
+                                <li><a href='administrarModelos'>Modelos</a></li>
+                                <li><a href='administrarQuienesSomos'>Quienes Somos</a></li>
+                                <li><a href='administrarContactanos'>Contactanos</a></li>
+                                <li><a href='administrarUsuarios'>Usuarios</a></li>
+                                <li><a href='administrarConsultas'>Consultas</a></li>
+                                <li><a href='administrarMensajes'>Mensajes<span id="cont-mensajes"class="badge"></span></a></li>
                             </ul>
                         </div>
                     </nav>

@@ -66,10 +66,10 @@ and open the template in the editor.
                              otro elemento que se pueda ocultar al minimizar la barra -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">                            
                             <ul class="nav navbar-nav navbar-right">
-                                <li> <!--class='active'--><a href='index.php'>Inicio</a></li>
-                                <li><a href='modelos.php'>Modelos</a></li>
-                                <li><a href='quienesSomos.php'>Quienes Somos</a></li>
-                                <li><a href='contactanos.php'>Contactanos</a></li>
+                                <li> <!--class='active'--><a href='index'>Inicio</a></li>
+                                <li><a href='modelos'>Modelos</a></li>
+                                <li><a href='quienesSomos'>Quienes Somos</a></li>
+                                <li><a href='contactanos'>Contactanos</a></li>
                             </ul>
                         </div>
                     </nav>
