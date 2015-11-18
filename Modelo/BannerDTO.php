@@ -4,7 +4,7 @@ class BannerDTO {
     public $nombre;
     public $ruta;
     public $detalle;
-    public $tamaño;
+    public $tamanio;
 
     public function BannerDTO(){
     }
@@ -41,11 +41,11 @@ class BannerDTO {
         return $this->detalle = $detalle;
     }
     
-    function getTamaño() {
-        return $this->tamaño;
+    function getTamanio() {
+        return $this->tamanio;
     }
 
-    function setTamaño($tamaño) {
-        $this->tamaño = $tamaño;
+    function setTamanio($tamanio) {
+        $this->tamanio = $tamanio;
     }
 }

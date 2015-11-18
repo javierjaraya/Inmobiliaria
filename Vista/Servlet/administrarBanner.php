@@ -12,12 +12,14 @@ if ($accion != null) {
         echo $json;
     } else if ($accion == "AGREGAR") {
         include_once("../../util/UpdateImagen.php");
+        
+        $tamanio = htmlspecialchars($_REQUEST['tamañoDetalle'])."";
 
         $banner = new BannerDTO();
         $banner->setNombre($_FILES['imagen']['name']);
         $banner->setRuta("Files/img/banner/" . $_FILES['imagen']['name']);
+        $banner->setTamanio($tamanio."");
         $banner->setDetalle("");
-        $banner->setTamaño($_FILES['imagen']['size']);
 
         $subir = new UpdateImagen($banner->getNombre(), $_FILES['imagen'], 2000000, "../../Files/img/banner/", 1400, 600, true);
         $result = $subir->update();
@@ -27,8 +29,7 @@ if ($accion != null) {
             if ($result) {
                 echo json_encode(array(
                     'success' => true,
-                    'mensaje' => "Imagen subida correctamente"
-                ));
+                    'mensaje' => "Imagen subida correctamente"));
             } else {
                 echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
             }

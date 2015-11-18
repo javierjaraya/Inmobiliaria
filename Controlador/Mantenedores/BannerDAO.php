@@ -28,6 +28,7 @@ class BannerDAO{
             $banner->setIdImagen($fila['idImagen']);
             $banner->setNombre($fila['nombre']);
             $banner->setRuta($fila['ruta']);
+            $banner->setTamanio($fila['tamanio']);
             $banner->setDetalle($fila['detalle']);
             $banners[$i] = $banner;
             $i++;
@@ -45,6 +46,7 @@ class BannerDAO{
             $banner->setIdImagen($fila['idImagen']);
             $banner->setNombre($fila['nombre']);
             $banner->setRuta($fila['ruta']);
+            $banner->setTamanio($fila['tamanio']);
             $banner->setDetalle($fila['detalle']);
         }
         $this->conexion->desconectar();
@@ -62,6 +64,7 @@ class BannerDAO{
             $banner->setIdImagen($fila['idImagen']);
             $banner->setNombre($fila['nombre']);
             $banner->setRuta($fila['ruta']);
+            $banner->setTamanio($fila['tamanio']);
             $banner->setDetalle($fila['detalle']);
             $banners[$i] = $banner;
             $i++;
@@ -72,8 +75,8 @@ class BannerDAO{
 
     public function save($banner) {
         $this->conexion->conectar();
-        $query = "INSERT INTO banner (nombre,ruta,detalle)"
-                . " VALUES ('".$banner->getNombre()."' , '".$banner->getRuta()."' , '".$banner->getDetalle()."' )";
+        $query = "INSERT INTO banner (nombre,ruta,tamanio,detalle)"
+                . " VALUES ('".$banner->getNombre()."' , '".$banner->getRuta()."' , '".$banner->getTamanio()."','".$banner->getDetalle()."' )";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
@@ -84,6 +87,7 @@ class BannerDAO{
         $query = "UPDATE banner SET "
                 . "  nombre = '".$banner->getNombre()."' ,"
                 . "  ruta = '".$banner->getRuta()."' ,"
+                . "  tamanio = '".$banner->getTamanio()."' ,"
                 . "  detalle = '".$banner->getDetalle()."' "
                 . " WHERE  idImagen =  ".$banner->getIdImagen()." ";
         $result = $this->conexion->ejecutar($query);

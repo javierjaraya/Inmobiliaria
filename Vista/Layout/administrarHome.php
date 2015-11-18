@@ -10,9 +10,10 @@
                     <thead>
                         <tr>
                             <th data-field="idBanner">ID</th>
-                            <th data-field="nombre">Miniatura</th>
-                            <th data-field="ruta">Nombre</th>
-                            <th data-field="vista">Ruta</th>
+                            <th data-field="miniatura">Miniatura</th>
+                            <th data-field="nombre">Nombre</th>
+                            <th data-field="ruta">Ruta</th>
+                            <th data-field="tamaño">Tamaño</th>
                             <th data-field="accion">Accion</th>
                         </tr>
                     </thead>
@@ -51,8 +52,8 @@
                                     </div>
                                     <input type="hidden" value="" name="accion" id="accion">
                                     <input type="hidden" value="" name="tamaño" id="tamaño">
+                                    <input type="hidden" value="" name="tamañoDetalle" id="tamañoDetalle">
                                     <input type="hidden" value="" name="idImagen" id="idImagen">
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
                                 </section>                         
                             </section><!-- Fin Row-->
                         </div>
@@ -144,6 +145,7 @@
                     cambiarEstado("imagen", false);
                 }
                 document.getElementById('tamaño').value = tamaño;
+                document.getElementById('tamañoDetalle').value = tamaño+" Mb";
                 document.getElementById('detalle-imagen').innerHTML = output.join('');//Introducimos la lista de archivos entre las etiquetas <ul></ul>
             }
             document.getElementById('imagen').addEventListener('change', handleFileSelect, false);//Ponemos un listener para escuchar cuando el evento Change del input file se ejecute, quiere decir cuando se de click en "Abrir"
@@ -165,6 +167,7 @@
                         contenido += "<td width='100px'><img src='../../" + v.ruta + "' width='90px'></td>";
                         contenido += "<td>" + v.nombre + "</td>";
                         contenido += "<td>" + v.ruta + "</td>";
+                        contenido += "<td>" + v.tamanio + "</td>";
                         contenido += "<td width='60px'>";
                         contenido += "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='borrar(" + v.idImagen + ")'></button>";
                         contenido += "</td>";
