@@ -1,6 +1,7 @@
 <?php
 include_once 'Nucleo/ConexionMySQL.php';
 include_once '../../Modelo/CasaDTO.php';
+include_once '../../Modelo/ImagenDTO.php';
 
 class CasaDAO{
     private $conexion;
@@ -19,7 +20,7 @@ class CasaDAO{
 
     public function findAll() {
         $this->conexion->conectar();
-        $query = "SELECT * FROM casa";
+        $query = "select * from casa C JOIN imagen I ON C.idCasa = I.idCasa WHERE I.imagenPrincipal = 1";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
         $casas = array();
@@ -27,7 +28,6 @@ class CasaDAO{
             $casa = new CasaDTO();
             $casa->setIdCasa($fila['idCasa']);
             $casa->setNombreModelo($fila['nombreModelo']);
-            $casa->setPrecio($fila['precio']);
             $casa->setM2($fila['m2']);
             $casa->setDormitorio($fila['dormitorio']);
             $casa->setBanio($fila['banio']);
@@ -35,6 +35,16 @@ class CasaDAO{
             $casa->setPrecioKitPisoMadera($fila['precioKitPisoMadera']);
             $casa->setPrecioKitPisoMaderaInstalado($fila['precioKitPisoMaderaInstalado']);
             $casa->setPrecioKitPisoRadierInstalado($fila['precioKitPisoRadierInstalado']);
+            
+            $imagen = new ImagenDTO();
+            $imagen->setIdImagen($fila['idImagen']);
+            $imagen->setIdCasa($fila['idCasa']);
+            $imagen->setImagenPrincipal($fila['imagenPrincipal']);
+            $imagen->setNombreImagen($fila['nombreImagen']);
+            $imagen->setRutaImagen($fila['rutaImagen']);
+            
+            $casa->setImagen($imagen);
+            
             $casas[$i] = $casa;
             $i++;
         }
@@ -50,7 +60,6 @@ class CasaDAO{
         while ($fila = mysql_fetch_assoc($result)) {
             $casa->setIdCasa($fila['idCasa']);
             $casa->setNombreModelo($fila['nombreModelo']);
-            $casa->setPrecio($fila['precio']);
             $casa->setM2($fila['m2']);
             $casa->setDormitorio($fila['dormitorio']);
             $casa->setBanio($fila['banio']);
@@ -65,7 +74,7 @@ class CasaDAO{
 
     public function findLikeAtrr($cadena) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM casa WHERE  upper(idCasa) LIKE upper(".$cadena.")  OR  upper(nombreModelo) LIKE upper('".$cadena."')  OR  upper(precio) LIKE upper(".$cadena.")  OR  upper(m2) LIKE upper(".$cadena.")  OR  upper(dormitorio) LIKE upper(".$cadena.")  OR  upper(banio) LIKE upper(".$cadena.")  OR  upper(precioKit) LIKE upper(".$cadena.")  OR  upper(precioKitPisoMadera) LIKE upper(".$cadena.")  OR  upper(precioKitPisoMaderaInstalado) LIKE upper(".$cadena.")  OR  upper(precioKitPisoRadierInstalado) LIKE upper(".$cadena.") ";
+        $query = "SELECT * FROM casa WHERE upper(nombreModelo) LIKE upper('".$cadena."') OR  upper(m2) LIKE upper(".$cadena.")  OR  upper(dormitorio) LIKE upper(".$cadena.")  OR  upper(banio) LIKE upper(".$cadena.")  OR  upper(precioKit) LIKE upper(".$cadena.")  OR  upper(precioKitPisoMadera) LIKE upper(".$cadena.")  OR  upper(precioKitPisoMaderaInstalado) LIKE upper(".$cadena.")  OR  upper(precioKitPisoRadierInstalado) LIKE upper(".$cadena.") ";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
         $casas = array();
@@ -73,7 +82,6 @@ class CasaDAO{
             $casa = new CasaDTO();
             $casa->setIdCasa($fila['idCasa']);
             $casa->setNombreModelo($fila['nombreModelo']);
-            $casa->setPrecio($fila['precio']);
             $casa->setM2($fila['m2']);
             $casa->setDormitorio($fila['dormitorio']);
             $casa->setBanio($fila['banio']);
@@ -90,8 +98,8 @@ class CasaDAO{
 
     public function save($casa) {
         $this->conexion->conectar();
-        $query = "INSERT INTO casa (idCasa,nombreModelo,precio,m2,dormitorio,banio,precioKit,precioKitPisoMadera,precioKitPisoMaderaInstalado,precioKitPisoRadierInstalado)"
-                . " VALUES ( ".$casa->getIdCasa()." , '".$casa->getNombreModelo()."' ,  ".$casa->getPrecio()." ,  ".$casa->getM2()." ,  ".$casa->getDormitorio()." ,  ".$casa->getBanio()." ,  ".$casa->getPrecioKit()." ,  ".$casa->getPrecioKitPisoMadera()." ,  ".$casa->getPrecioKitPisoMaderaInstalado()." ,  ".$casa->getPrecioKitPisoRadierInstalado()." )";
+        $query = "INSERT INTO casa (idCasa,nombreModelo,m2,dormitorio,banio,precioKit,precioKitPisoMadera,precioKitPisoMaderaInstalado,precioKitPisoRadierInstalado)"
+                . " VALUES ( ".$casa->getIdCasa()." , '".$casa->getNombreModelo()."' ,  ".$casa->getM2()." ,  ".$casa->getDormitorio()." ,  ".$casa->getBanio()." ,  ".$casa->getPrecioKit()." ,  ".$casa->getPrecioKitPisoMadera()." ,  ".$casa->getPrecioKitPisoMaderaInstalado()." ,  ".$casa->getPrecioKitPisoRadierInstalado()." )";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
@@ -101,7 +109,6 @@ class CasaDAO{
         $this->conexion->conectar();
         $query = "UPDATE casa SET "
                 . "  nombreModelo = '".$casa->getNombreModelo()."' ,"
-                . "  precio =  ".$casa->getPrecio()." ,"
                 . "  m2 =  ".$casa->getM2()." ,"
                 . "  dormitorio =  ".$casa->getDormitorio()." ,"
                 . "  banio =  ".$casa->getBanio()." ,"

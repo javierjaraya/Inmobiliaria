@@ -6,19 +6,19 @@
             <form id="fm" role="form" method="POST">
                 <div id="nombreGroup" class="form-group has-feedback">
                     <label class="control-label" for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="nombreStatus" placeholder="Nombre" onchange="validar('nombre', 'text')">
+                    <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="nombreStatus" placeholder="Nombre y Apellido" onchange="validar('nombre', 'text')">
                     <span id="nombreIco" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="nombreStatus" class="sr-only">(success)</span>
                 </div>
                 <div id="emailGroup" class="form-group has-feedback">
                     <label class="control-label" for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailStatus" placeholder="Introduce tu email"  onchange="validar('email', 'email')">
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailStatus" placeholder="ejemplo@correo.com"  onchange="validar('email', 'email')">
                     <span id="emailIco" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="emailStatus" class="sr-only">(error)</span>
                 </div>
                 <div id="telefonoGroup" class="form-group has-feedback">
                     <label class="control-label" for="telefono">Telefono</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" aria-describedby="telefonoStatus" placeholder="Telefono"  onchange="validar('telefono', 'tel')">
+                    <input type="tel" class="form-control" id="telefono" name="telefono" aria-describedby="telefonoStatus" placeholder="Número de red fija o Celular"  onchange="validar('telefono', 'tel')">
                     <span id="telefonoIco" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="telefonoStatus" class="sr-only">(error)</span>
                 </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div id="detalleGroup" class="form-group has-feedback">
                     <label class="control-label" for="detalle">Detalle</label>
-                    <textarea type="text" class="form-control" id="detalle" name="detalle" rows="5" aria-describedby="detalleStatus" placeholder="Detalle"  onchange="validar('detalle', 'text')"></textarea>
+                    <textarea type="text" class="form-control" id="detalle" name="detalle" rows="5" aria-describedby="detalleStatus" placeholder="Que desea consultar"  onchange="validar('detalle', 'text')"></textarea>
                     <span id="detalleIco" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="detalleStatus" class="sr-only">(error)</span>
                 </div>

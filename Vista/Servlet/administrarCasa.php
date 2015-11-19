@@ -13,7 +13,6 @@ if ($accion != null) {
     } else if ($accion == "AGREGAR") {
         $idCasa = htmlspecialchars($_REQUEST['idCasa']);
         $nombreModelo = htmlspecialchars($_REQUEST['nombreModelo']);
-        $precio = htmlspecialchars($_REQUEST['precio']);
         $m2 = htmlspecialchars($_REQUEST['m2']);
         $dormitorio = htmlspecialchars($_REQUEST['dormitorio']);
         $banio = htmlspecialchars($_REQUEST['banio']);
@@ -27,7 +26,6 @@ if ($accion != null) {
             $casa = new CasaDTO();
             $casa->setIdCasa($idCasa);
             $casa->setNombreModelo($nombreModelo);
-            $casa->setPrecio($precio);
             $casa->setM2($m2);
             $casa->setDormitorio($dormitorio);
             $casa->setBanio($banio);
@@ -72,7 +70,6 @@ if ($accion != null) {
     } else if ($accion == "ACTUALIZAR") {
         $idCasa = htmlspecialchars($_REQUEST['idCasa']);
         $nombreModelo = htmlspecialchars($_REQUEST['nombreModelo']);
-        $precio = htmlspecialchars($_REQUEST['precio']);
         $m2 = htmlspecialchars($_REQUEST['m2']);
         $dormitorio = htmlspecialchars($_REQUEST['dormitorio']);
         $banio = htmlspecialchars($_REQUEST['banio']);
@@ -84,7 +81,6 @@ if ($accion != null) {
             $casa = new CasaDTO();
             $casa->setIdCasa($idCasa);
             $casa->setNombreModelo($nombreModelo);
-            $casa->setPrecio($precio);
             $casa->setM2($m2);
             $casa->setDormitorio($dormitorio);
             $casa->setBanio($banio);

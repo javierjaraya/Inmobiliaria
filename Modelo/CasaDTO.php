@@ -2,14 +2,15 @@
 class CasaDTO {
     public $idCasa;
     public $nombreModelo;
-    public $precio;
     public $m2;
     public $dormitorio;
     public $banio;
     public $precioKit;
     public $precioKitPisoMadera;
     public $precioKitPisoMaderaInstalado;
-    public $precioKitPisoRadierInstalado;
+    public $precioKitPisoRadierInstalado; 
+    
+    public $imagen;
 
     public function CasaDTO(){
     }
@@ -28,14 +29,6 @@ class CasaDTO {
 
     function setNombreModelo($nombreModelo) {
         return $this->nombreModelo = $nombreModelo;
-    }
-
-    function getPrecio() {
-        return $this->precio;
-    }
-
-    function setPrecio($precio) {
-        return $this->precio = $precio;
     }
 
     function getM2() {
@@ -94,4 +87,11 @@ class CasaDTO {
         return $this->precioKitPisoRadierInstalado = $precioKitPisoRadierInstalado;
     }
 
+    function getImagen() {
+        return $this->imagen;
+    }
+
+    function setImagen($imagen) {
+        $this->imagen = $imagen;
+    }
 }
