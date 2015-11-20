@@ -5,6 +5,7 @@ class ImagenDTO {
     public $imagenPrincipal;
     public $nombreImagen;
     public $rutaImagen;
+    public $tamaño;
 
     public function ImagenDTO(){
     }
@@ -47,6 +48,14 @@ class ImagenDTO {
 
     function setRutaImagen($rutaImagen) {
         return $this->rutaImagen = $rutaImagen;
+    }
+    
+    function getTamaño() {
+        return $this->tamaño;
+    }
+
+    function setTamaño($tamaño) {
+        $this->tamaño = $tamaño;
     }
 
 }

@@ -177,10 +177,6 @@
         );
     }
 
-    function cargarModal(id) {
-        console.log("->" + id);
-    }
-
     function borrar(id) {
         confirmacion('Confirmacion', '¿Esta seguro?, una vez eliminado no se podran recuperar los datos.');
         document.getElementById('idCasa').value = id;
@@ -188,7 +184,7 @@
 
     function confirmarBorrar() {
         var idCasa = document.getElementById('idCasa').value;
-        $.post('../Servlet/administrarCasa.php?accion=BORRAR', {idCasa: idCasa}, function (result) {
+        $.post('../Servlet/administrarCasa.php?accion=BORRAR', {idCasa: idCasa}, function (result) {            
             if (result.success) {
                 $('#dg-confirmacion').modal('toggle'); //Cerrar Modal
                 cargarDatos(); //Refrescamos la tabla

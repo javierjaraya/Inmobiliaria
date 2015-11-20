@@ -71,6 +71,10 @@ class Sistema {
     public function getBannerLikeAtrr($cadena) {
         return $this->bannerDAO->findLikeAtrr($cadena);
     }
+    
+    public function getIDCasa() {
+        return $this->casaDAO->getID();
+    }
 
     public function getAllCasas() {
         return $this->casaDAO->findAll();
@@ -187,6 +191,10 @@ class Sistema {
     public function getImagenByID($idImagen) {
         return $this->imagenDAO->findByID($idImagen);
     }
+    
+    public function getImagenByIDCasa($idCasa){
+        return $this->imagenDAO->findByIDCasa($idCasa);
+    }
 
     public function getImagenLikeAtrr($cadena) {
         return $this->imagenDAO->findLikeAtrr($cadena);
@@ -287,7 +295,11 @@ class Sistema {
     public function getPlanoByID($idPlano) {
         return $this->planoDAO->findByID($idPlano);
     }
-
+    
+    public function getPlanoByIDCasa($idCasa){
+        return $this->planoDAO->findByIDCasa($idCasa);
+    }
+    
     public function getPlanoLikeAtrr($cadena) {
         return $this->planoDAO->findLikeAtrr($cadena);
     }

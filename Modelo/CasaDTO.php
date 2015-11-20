@@ -9,6 +9,7 @@ class CasaDTO {
     public $precioKitPisoMadera;
     public $precioKitPisoMaderaInstalado;
     public $precioKitPisoRadierInstalado; 
+    public $especificacion;
     
     public $imagen;
 
@@ -86,7 +87,15 @@ class CasaDTO {
     function setPrecioKitPisoRadierInstalado($precioKitPisoRadierInstalado) {
         return $this->precioKitPisoRadierInstalado = $precioKitPisoRadierInstalado;
     }
+    
+    function getEspecificacion() {
+        return $this->especificacion;
+    }
 
+    function setEspecificacion($especificacion) {
+        $this->especificacion = $especificacion;
+    }
+    
     function getImagen() {
         return $this->imagen;
     }
