@@ -3,175 +3,8 @@
     <h4>Modelos de Casas</h4>
     <div class="row">
         <div class="col-md-9">
-            <div class="row">
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="Files/img/casa1.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Manantiales</h3>                            
-                            <div class="precio">
-                                <strong>Desde $ 7.275.000</strong>
-                            </div>
-                            <section class="resDatos row">
-                                <section class="dato1 col-md-4">
-                                    <figure><img src="Files/img/icon-dormitorios.png"></figure>                                    
-                                    <p class="resDormitorios">2</p>
-                                </section>
-                                <section class="dato2 col-md-4">
-                                    <figure><img src="Files/img/icon-banios.png"></figure>
-                                    <p class="resBanios">2</p>
-                                </section>
-                                <section class="dato3 col-md-4" original-title="">
-                                    <figure><img src="Files/img/icon-medidas.png"></figure>
-                                    <p class="resMetraje">50m<sup>2</sup> / 50m<sup>2</sup></p>
-                                </section>
-                            </section>
-                            <section class="boton-conoce">
-                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>     
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="Files/img/casa2.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Culipran</h3>                            
-                            <div class="precio">
-                                <strong>Desde $ 6.675.000</strong>
-                            </div>
-                            <section class="resDatos row">
-                                <section class="dato1 col-md-4">
-                                    <figure><img src="Files/img/icon-dormitorios.png"></figure>                                    
-                                    <p class="resDormitorios">2</p>
-                                </section>
-                                <section class="dato2 col-md-4">
-                                    <figure><img src="Files/img/icon-banios.png"></figure>
-                                    <p class="resBanios">2</p>
-                                </section>
-                                <section class="dato3 col-md-4" original-title="">
-                                    <figure><img src="Files/img/icon-medidas.png"></figure>
-                                    <p class="resMetraje">50m<sup>2</sup> / 50m<sup>2</sup></p>
-                                </section>
-                            </section>
-                            <section class="boton-conoce">
-                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="Files/img/casa3.jpg" alt="...">
-                        <div class="caption">
-                            <h3>El Yali</h3>                            
-                            <div class="precio">
-                                <strong>Desde $ 3.175.000</strong>
-                            </div>
-                            <section class="resDatos row">
-                                <section class="dato1 col-md-4">
-                                    <figure><img src="Files/img/icon-dormitorios.png"></figure>                                    
-                                    <p class="resDormitorios">2</p>
-                                </section>
-                                <section class="dato2 col-md-4">
-                                    <figure><img src="Files/img/icon-banios.png"></figure>
-                                    <p class="resBanios">2</p>
-                                </section>
-                                <section class="dato3 col-md-4" original-title="">
-                                    <figure><img src="Files/img/icon-medidas.png"></figure>
-                                    <p class="resMetraje">50m<sup>2</sup> / 50m<sup>2</sup></p>
-                                </section>
-                            </section>
-                            <section class="boton-conoce">
-                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="Files/img/casa4.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Corneche</h3>                            
-                            <div class="precio">
-                                <strong>Desde $ 7.275.000</strong>
-                            </div>
-                            <section class="resDatos row">
-                                <section class="dato1 col-md-4">
-                                    <figure><img src="Files/img/icon-dormitorios.png"></figure>                                    
-                                    <p class="resDormitorios">2</p>
-                                </section>
-                                <section class="dato2 col-md-4">
-                                    <figure><img src="Files/img/icon-banios.png"></figure>
-                                    <p class="resBanios">2</p>
-                                </section>
-                                <section class="dato3 col-md-4" original-title="">
-                                    <figure><img src="Files/img/icon-medidas.png"></figure>
-                                    <p class="resMetraje">50m<sup>2</sup> / 50m<sup>2</sup></p>
-                                </section>
-                            </section>
-                            <section class="boton-conoce">
-                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="Files/img/casa5.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Los Andes</h3>                            
-                            <div class="precio">
-                                <strong>Desde $ 4.275.000</strong>
-                            </div>
-                            <section class="resDatos row">
-                                <section class="dato1 col-md-4">
-                                    <figure><img src="Files/img/icon-dormitorios.png"></figure>                                    
-                                    <p class="resDormitorios">2</p>
-                                </section>
-                                <section class="dato2 col-md-4">
-                                    <figure><img src="Files/img/icon-banios.png"></figure>
-                                    <p class="resBanios">2</p>
-                                </section>
-                                <section class="dato3 col-md-4" original-title="">
-                                    <figure><img src="Files/img/icon-medidas.png"></figure>
-                                    <p class="resMetraje">50m<sup>2</sup> / 50m<sup>2</sup></p>
-                                </section>
-                            </section>
-                            <section class="boton-conoce">
-                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="Files/img/casa6.jpg" alt="...">
-                        <div class="caption">
-                            <h3>Terrazas del Claro</h3>                            
-                            <div class="precio">
-                                <strong>Desde $ 7.275.000</strong>
-                            </div>
-                            <section class="resDatos row">
-                                <section class="dato1 col-md-4">
-                                    <figure><img src="Files/img/icon-dormitorios.png"></figure>                                    
-                                    <p class="resDormitorios">2</p>
-                                </section>
-                                <section class="dato2 col-md-4">
-                                    <figure><img src="Files/img/icon-banios.png"></figure>
-                                    <p class="resBanios">2</p>
-                                </section>
-                                <section class="dato3 col-md-4" original-title="">
-                                    <figure><img src="Files/img/icon-medidas.png"></figure>
-                                    <p class="resMetraje">50m<sup>2</sup> / 50m<sup>2</sup></p>
-                                </section>
-                            </section>
-                            <section class="boton-conoce">
-                                <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detalle" onclick="cargarModal()">Conoce más</button></p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
+            <div id="contenido-modelos" class="row">
+                
             </div>
         </div><!-- Fin Vista Modelos-->
         <div class="col-md-3 filtros well center-block">
@@ -234,6 +67,7 @@
         </div><!-- Fin Filtro-->
     </div><!-- Fin fila -->
 </div><!-- Fin container-->  
+
 <!-- Modal Detalle-->
 <div class="modal fade bs-example-modal-lg" id="detalle" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg">
@@ -247,30 +81,7 @@
                 <div class="modal-body">
                     <section class="row">
                         <section class="col-md-4">
-                            <img src="Files/img/casa1.jpg" alt="...">
-                            <div class="caption">
-                                <h3>Terrazas del Claro</h3>                            
-                                <div class="precio">
-                                    <strong>Desde $ 7.275.000</strong>
-                                </div>
-                                <section class="resDatos row">
-                                    <section class="dato1 col-md-4">
-                                        <figure><img src="Files/img/icon-dormitorios.png"></figure>                                    
-                                        <p class="resDormitorios">2</p>
-                                    </section>
-                                    <section class="dato2 col-md-4">
-                                        <figure><img src="Files/img/icon-banios.png"></figure>
-                                        <p class="resBanios">2</p>
-                                    </section>
-                                    <section class="dato3 col-md-4" original-title="">
-                                        <figure><img src="Files/img/icon-medidas.png"></figure>
-                                        <p class="resMetraje">50m<sup>2</sup> / 50m<sup>2</sup></p>
-                                    </section>
-                                </section>
-                                <section class="boton-conoce">
-                                    <p><button type="button" class="btn btn-success" data-toggle="modal" data-target="#consulta">Consultar</button></p>     
-                                </section>
-                            </div>
+                            Detalle
                         </section>
                         <section class="col-md-8">
                             <h4>Caracteristicas tecnicas</h4>
@@ -326,9 +137,72 @@
 </div>
 <!-- END Modal Consulta-->
 <script type="text/javascript">
-    function cargarModal(id) {
-        console.log("Cargando..");
-        //$('#panel-modal').html("My Large Modal Label");
+    $(document).ready(function () {
+        cargarDatos();
+    });
+
+    function cargarDatos() {
+        var url_json = 'Vista/Servlet/administrarCasa.php?accion=LISTADO';
+        $("#contenido-modelos").empty();
+        $.getJSON(
+                url_json,
+                function (data) {
+                    $.each(data, function (k, v) {
+                        var contenido = "<div class='col-sm-6 col-md-4'>";
+                        contenido += "<div class='thumbnail'>";
+                        contenido += "<img src='" + v.imagen.rutaImagen + "'>";
+                        contenido += "<div class='caption'>";
+                        contenido += "    <h3>" + v.nombreModelo + "</h3>";
+                        contenido += "    <div class='precio'>";
+                        contenido += "        <strong>Desde $ " + formatNumber.new(v.precioKit) + "</strong>";
+                        contenido += "    </div>";
+                        contenido += "    <section class='resDatos row'>";
+                        contenido += "        <section class='dato1 col-md-4'>";
+                        contenido += "            <figure><img src='Files/img/icon-dormitorios.png'></figure>";
+                        contenido += "            <p class='resDormitorios'>" + v.dormitorio + "</p>";
+                        contenido += "        </section>";
+                        contenido += "        <section class='dato2 col-md-4'>";
+                        contenido += "            <figure><img src='Files/img/icon-banios.png'></figure>";
+                        contenido += "            <p class='resBanios'>" + v.banio + "</p>";
+                        contenido += "        </section>";
+                        contenido += "        <section class='dato3 col-md-4' original-title=''>";
+                        contenido += "            <figure><img src='Files/img/icon-medidas.png'></figure>";
+                        contenido += "            <p class='resMetraje'>" + v.m2 + "m<sup>2</sup></p>";
+                        contenido += "        </section>";
+                        contenido += "    </section>";
+                        contenido += "    <section class='boton-conoce'>";
+                        contenido += "        <form action='administrarModelo' method='GET'>";
+                        contenido += "        <p><button type='button' class='btn btn-success' data-toggle='modal' data-target='#detalle' onclick='cargarModal()'>Conoce más</button></p>";
+                        contenido += "        <input type='hidden' name='idCasa' value='" + v.idCasa + "'>";
+                        contenido += "        <input type='hidden' name='accion' value='MODIFICAR'></form>";
+                        contenido += "    </section>";
+                        contenido += "</div>";
+                        contenido += "</div>";
+                        contenido += "</div>";
+                        $("#contenido-modelos").append(contenido);
+                    });
+                }
+        );
+    }
+
+    var formatNumber = {
+        separador: ".", // separador para los miles
+        sepDecimal: ',', // separador para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new : function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
     }
 </script>
 <?php include 'footer.php'; ?>

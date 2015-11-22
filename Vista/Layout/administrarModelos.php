@@ -6,6 +6,7 @@
     </form>
     <input type="hidden" id="idCasa" name="idCasaBorrar" value="">
     <div class="row">
+        <!-- Vista Modelos -->
         <div class="col-md-9">
             <div id="contenido-modelos" class="row">
 

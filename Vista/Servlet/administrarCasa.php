@@ -36,62 +36,70 @@ if ($accion != null) {
         $casa->setPrecioKitPisoRadierInstalado($precioKitPisoRadierInstalado);
         $casa->setEspecificacion($especificacion);
 
-        $result = $control->addCasa($casa);
-        if ($result) {
-            //REGISTRO IMAGENES MODELO
-            for ($i = 0; $i < count($_FILES["imagen"]["name"]); $i++) {
-                $subirImagen = new SubirImagen("../../Files/img/modelos/");
-                $subirImagen->setMaximoSize(2000000); //2mb            
-                //$subirImagen->set(300, 200);
+        if (validarTamaños($_FILES["planos"], 2000000) == true) {
+            if (validarTamaños($_FILES["imagen"], 2000000) == true) {
+                $result = $control->addCasa($casa);
+                if ($result) {
+                    //REGISTRO IMAGENES MODELO
+                    for ($i = 0; $i < count($_FILES["imagen"]["name"]); $i++) {
+                        $subirImagen = new SubirImagen("../../Files/img/modelos/");
+                        $subirImagen->setMaximoSize(2000000); //2mb            
+                        //$subirImagen->set(300, 200);
 
-                $subirImagen->setName("modelo" . $idCasa . "" . $i);
-                $nombreImagen = $subirImagen->asignaNombre($_FILES['imagen']['type'][$i], "modelo" . $idCasa . "" . $i);
-                $respuesta = $subirImagen->subirImagenEspecifica($_FILES["imagen"], $i);
+                        $subirImagen->setName("modelo" . $idCasa . "" . $i);
+                        $nombreImagen = $subirImagen->asignaNombre($_FILES['imagen']['type'][$i], "modelo" . $idCasa . "" . $i);
+                        $respuesta = $subirImagen->subirImagenEspecifica($_FILES["imagen"], $i);
 
-                if ($respuesta == true) {
-                    $imagen = new ImagenDTO();
-                    $imagen->setIdCasa($idCasa);
-                    if ($i == 0) {
-                        $imagen->setImagenPrincipal(1);
-                    } else {
-                        $imagen->setImagenPrincipal(0);
-                    }
-                    $imagen->setNombreImagen($nombreImagen);
-                    $imagen->setRutaImagen("Files/img/modelos/" . $nombreImagen);
-                    $imagen->setTamaño($_FILES['imagen']['size'][$i] . " bytes");
+                        if ($respuesta == true) {
+                            $imagen = new ImagenDTO();
+                            $imagen->setIdCasa($idCasa);
+                            if ($i == 0) {
+                                $imagen->setImagenPrincipal(1);
+                            } else {
+                                $imagen->setImagenPrincipal(0);
+                            }
+                            $imagen->setNombreImagen($nombreImagen);
+                            $imagen->setRutaImagen("Files/img/modelos/" . $nombreImagen);
+                            $imagen->setTamaño($_FILES['imagen']['size'][$i] . " bytes");
 
-                    $result = $control->addImagen($imagen); //Registramos la imagen en la BD
+                            $result = $control->addImagen($imagen); //Registramos la imagen en la BD
+                        }
+                    }//FIN registro imagenes
+                    //REGISTRO PLANOS
+                    for ($i = 0; $i < count($_FILES["planos"]["name"]); $i++) {
+                        $subirPlano = new SubirImagen("../../Files/img/planos/");
+                        $subirPlano->setMaximoSize(2000000); //2mb            
+                        //$subirPlano->set(300, 200);
+
+                        $subirPlano->setName("plano" . $idCasa . "" . $i);
+                        $nombreImagen = $subirPlano->asignaNombre($_FILES['planos']['type'][$i], "plano" . $idCasa . "" . $i);
+                        $respuesta = $subirPlano->subirImagenEspecifica($_FILES["planos"], $i);
+
+                        if ($respuesta == true) {
+                            $plano = new PlanoDTO();
+                            $plano->setIdCasa($idCasa);
+
+                            $plano->setNombreImagen($nombreImagen);
+                            $plano->setRutaImagen("Files/img/planos/" . $nombreImagen);
+                            $plano->setTamaño($_FILES['imagen']['size'][$i] . " bytes");
+
+                            $result = $control->addPlano($plano); //Registramos el plano en la BD
+                        }
+                    }//FIN registro planos
                 }
-            }//FIN registro imagenes
-            //REGISTRO PLANOS
-            for ($i = 0; $i < count($_FILES["planos"]["name"]); $i++) {
-                $subirPlano = new SubirImagen("../../Files/img/planos/");
-                $subirPlano->setMaximoSize(2000000); //2mb            
-                //$subirPlano->set(300, 200);
-
-                $subirPlano->setName("plano" . $idCasa . "" . $i);
-                $nombreImagen = $subirPlano->asignaNombre($_FILES['planos']['type'][$i], "plano" . $idCasa . "" . $i);
-                $respuesta = $subirPlano->subirImagenEspecifica($_FILES["planos"], $i);
-
-                if ($respuesta == true) {
-                    $plano = new PlanoDTO();
-                    $plano->setIdCasa($idCasa);
-
-                    $plano->setNombreImagen($nombreImagen);
-                    $plano->setRutaImagen("Files/img/planos/" . $nombreImagen);
-                    $plano->setTamaño($_FILES['imagen']['size'][$i] . " bytes");
-
-                    $result = $control->addPlano($plano); //Registramos el plano en la BD
+                if ($result) {
+                    echo json_encode(array(
+                        'success' => true,
+                        'mensaje' => "Casa ingresada correctamente"
+                    ));
+                } else {
+                    echo json_encode(array('success' => false,'errorMsg' => 'Ha ocurrido un error.'));
                 }
-            }//FIN registro planos
-        }
-        if ($result) {
-            echo json_encode(array(
-                'success' => true,
-                'mensaje' => "Casa ingresada correctamente"
-            ));
+            } else {
+                echo json_encode(array('success' => false,'errorMsg' => 'Algunas imagenes exceden el tamaño maximo permitido.'));
+            }
         } else {
-            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+            echo json_encode(array('success' => false,'errorMsg' => 'Algunos planos exceden el tamaño maximo permitido.'));
         }
     } else if ($accion == "BORRAR") {
         $idCasa = htmlspecialchars($_REQUEST['idCasa']);
@@ -99,13 +107,13 @@ if ($accion != null) {
         $imagenes = $control->getImagenByIDCasa($idCasa);
         $planos = $control->getPlanoByIDCasa($idCasa);
         $result = $control->removeCasa($idCasa);
-        
+
         if ($result) {
             for ($i = 0; $i < count($imagenes); $i++) {
                 unlink("../../" . $imagenes[$i]->getRutaImagen());
-            }            
+            }
             for ($i = 0; $i < count($planos); $i++) {
-                unlink("../../" . $planos[$i]->getRutaImagen());                
+                unlink("../../" . $planos[$i]->getRutaImagen());
             }
         }
 
@@ -158,4 +166,19 @@ if ($accion != null) {
         }
     }
 }
-    
+
+function validarTamaños($imagenes, $tamañoMaximo) {
+    $validar = true;
+    if ($imagenes["name"][0]) {
+        for ($i = 0; $i < count($imagenes["name"]); $i++) {
+            if ($imagenes["size"][$i] <= $tamañoMaximo) {
+                
+            } else {
+                $validar = false;
+            }
+        }
+    } else {
+        $validar = false;
+    }
+    return $validar;
+}
