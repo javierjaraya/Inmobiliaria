@@ -142,7 +142,7 @@
                     $.each(data, function (k, v) {
                         var contenido = "<div class='col-sm-6 col-md-4'>";
                         contenido += "<div class='thumbnail'>";
-                        contenido += "<img src='../../" + v.imagen.rutaImagen + "'>";
+                        contenido += "<img class='visualizacion' src='../../" + v.imagen.rutaImagen + "'>";
                         contenido += "<div class='caption'>";
                         contenido += "    <h3>" + v.nombreModelo + "</h3>";
                         contenido += "    <div class='precio'>";

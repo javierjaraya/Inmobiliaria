@@ -94,8 +94,15 @@ and open the template in the editor.
     height: 400px; 
     padding: 20px 10px 10px 10px;
 }
+.thumbnail {
+    min-height: 380px;
+}
 .thumbnail img{
     width: 97%;
+}
+.thumbnail visualizacion img{
+    width: 100px;
+    height: 100px;
 }
 .precio strong {
     color: #09c;
@@ -111,6 +118,7 @@ and open the template in the editor.
 }
 .resDatos img{
     width: 30px;
+    height: 30px;
 }
 .dato1, .dato2, .dato3{
     padding-left: 4px;

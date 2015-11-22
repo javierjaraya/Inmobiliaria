@@ -93,24 +93,24 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             <section id="seccion-nuevas-imagenes" class="row" style="display: inline;">
                 <section class="col-md-6">
                     <div id="imagenGroup" class="form-group has-feedback">
-                        <label class="control-label" for="imagen">Imagenes</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen[]" multiple="multiple" onchange="validar('text', 'imagen')">
+                        <label class="control-label" for="imagen">Imagenes (Maximo 2Mb)</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen[]" multiple="multiple">
                         <span id="imagenIco" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div id="list"></div>
                     </div>
                     <div id="visor-imagenes">
-                        
+
                     </div>
                 </section>
                 <section class="col-md-6">
                     <div id="planosGroup" class="form-group has-feedback">
-                        <label class="control-label" for="planos">Planos</label>
-                        <input type="file" class="form-control" id="planos" name="planos[]" multiple="multiple" onchange="validar('text', 'planos')">
+                        <label class="control-label" for="planos">Planos (Maximo 2Mb)</label>
+                        <input type="file" class="form-control" id="planos" name="planos[]" multiple="multiple">
                         <span id="planosIco" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div id="list"></div>
                     </div>
                     <div id="visor-planos">
-                        
+
                     </div>
                 </section>
             </section>
@@ -212,66 +212,82 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
         document.getElementById('accion').value = accion;
     });
 
-    var imagenes;
-    var planos;
+    var tamañoImagenesPermitido;
+    var tamañoPlanosPermitido;
     function tamañoImagenes(evt) {
-        imagenes = true;
-        var archivos = evt.target.files;        
+        tamañoImagenesPermitido = true;
+        $("#visor-imagenes").html("");
+        var archivos = evt.target.files;
         for (var i = 0, f; f = archivos[i]; i++) {
-            console.log("->" + f.size +' bytes');
-            if(f.size <= 2000000){
-                console.log(f.scr);
-                $("#visor-imagenes").append(""+f.name+" : Tamaño permitido<br>");
-            }else{
-                $("#visor-imagenes").append(f.name+" : Tamaño no permitido<br>");
-                imagenes = false;
+            var ta = redondeoDecimales((f.size / 1024) / 1024, 2);
+            if (typePermitido(f.type) == true) {
+                if (f.size <= 2000000) {
+                    cambiarEstado("imagen", true);
+                    $("#visor-imagenes").append("" + f.name + " : (" + ta + " Mb) Tamaño permitido<br>");
+                } else {
+                    cambiarEstado("imagen", false);
+                    $("#visor-imagenes").append(f.name + " : (" + ta + " Mb) Tamaño no permitido<br>");
+                    tamañoImagenesPermitido = false;
+                }
+            } else {
+                $("#visor-imagenes").append(f.name + " : (" + ta + " Mb) Archivo no permitido<br>");
+                cambiarEstado("imagen", false);
+                tamañoImagenesPermitido = false;
             }
-        }        
+        }
     }
     function tamañoPlanos(evt) {
-        planos  = true;
-        var archivos = evt.target.files;        
+        tamañoPlanosPermitido = true;
+        $("#visor-planos").html("");
+        var archivos = evt.target.files;
         for (var i = 0, f; f = archivos[i]; i++) {
-            console.log("->" + f.size +' bytes');
-            if(f.size <= 2000000){
-                console.log(f.name+" : Tamaño permitido");                
-            }else{
-                console.log(f.name+" : Tamaño no permitido");
-                planos = false;
+            var ta = redondeoDecimales((f.size / 1024) / 1024, 2);
+            if (typePermitido(f.type) == true) {
+                if (f.size <= 2000000) {
+                    cambiarEstado("planos", true);
+                    $("#visor-planos").append("" + f.name + " : (" + ta + " Mb) Tamaño permitido<br>");
+                } else {
+                    $("#visor-planos").append(f.name + " : (" + ta + " Mb) Tamaño no permitido<br>");
+                    tamañoPlanosPermitido = false;
+                    cambiarEstado("planos", false);
+                }
+            } else {
+                $("#visor-planos").append(f.name + " : (" + ta + " Mb) Archivo no permitido<br>");
+                tamañoImagenesPermitido = false;
+                cambiarEstado("planos", false);
             }
-        }        
+        }
     }
     document.getElementById('imagen').addEventListener('change', tamañoImagenes, false);
     document.getElementById('planos').addEventListener('change', tamañoPlanos, false);
-    
+
     function guardarModelo(evt) {
-        var especificacion = getAreaText("especificacion");        
-        
-        /*if (validarFormulario()) {                        
-         $('#fm').form('submit', {
-         url: "../Servlet/administrarCasa.php?especificacion=" + especificacion,
-         onSubmit: function () {
-         return $(this).form('validate');
-         },
-         success: function (result) {
-         console.log(result);
-         var result = eval('(' + result + ')');
-         if (result.success) {
-         $('#fm').empty();
-         mensaje('Exito', result.mensaje);
-         location.href = "administrarModelos";
-         } else {
-         mensaje('Error', result.errorMsg);
-         }
-         }
-         });
-         } else {
-         mensaje('Exito', "Error, falta completar algunos datos");
-         }/*
-         }
-         
-         function cargarDatos() {
-         /*
+        var especificacion = getAreaText("especificacion");
+
+        if (validarFormulario()) {
+            $('#fm').form('submit', {
+                url: "../Servlet/administrarCasa.php?especificacion=" + especificacion,
+                onSubmit: function () {
+                    return $(this).form('validate');
+                },
+                success: function (result) {
+                    var result = eval('(' + result + ')');
+                    if (result.success) {
+                        $('#fm').empty();
+                        mensaje('Exito', result.mensaje);
+                        location.href = "administrarModelos";
+                    } else {
+                        mensaje('Error', result.errorMsg);
+                    }
+                }
+            });
+        } else {
+            mensaje('Exito', "Error, falta completar algunos datos");
+        }
+    }
+
+    function cargarDatos() {
+        /*
          var url_json = '../Servlet/administrarEmpresa.php?accion=LISTADO';
          $("#areaTexto").empty();
          $.getJSON(
@@ -378,11 +394,11 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             valido = false;
             cambiarEstado("especificacion", false);
         }
-        if (imagen == null || imagen == "") {
+        if (imagen == null || imagen == "" || tamañoImagenesPermitido == false) {
             valido = false;
             cambiarEstado("imagen", false);
         }
-        if (planos == null || planos == "") {
+        if (planos == null || planos == "" || tamañoPlanosPermitido == false) {
             valido = false;
             cambiarEstado("planos", false)
         }
@@ -402,6 +418,21 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
         areaTexto = null;
         document.getElementById(nombre).value = texto;
         areaTexto = new nicEditor({fullPanel: true}).panelInstance(nombre, {hasPanel: true});
+    }
+
+    function redondeoDecimales(numero, decimales) {
+        var original = parseFloat(numero);
+        return numero.toFixed(decimales);
+    }
+
+    function typePermitido(type) {
+        var ext = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
+        for (var i = 0; i < ext.length; i++) {
+            if (ext[i] == type) {
+                return true;
+            }
+        }
+        return false;
     }
 
 </script>
