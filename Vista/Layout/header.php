@@ -1,4 +1,10 @@
-<?php session_start();if($_SESSION["autentificado"] != "SI") header('Location: ../../index.php');?>
+<?php
+session_start();
+if ($_SESSION["autentificado"] != "SI")
+    header('Location: ../../index.php');
+
+$perfil = $_SESSION["idPerfil"];
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -45,7 +51,7 @@ and open the template in the editor.
 
         <!-- GOOGLE MAPS -->
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>    
-        
+
         <link rel="stylesheet" href="../../Files/css/estilo.css">
         <script type="text/javascript">
             $(document).ready(function () {
@@ -58,11 +64,11 @@ and open the template in the editor.
                         url_json,
                         function (datos) {
                             var visor = document.getElementById('cont-mensajes');
-                            
-                            if(datos.cantidad>0){
+
+                            if (datos.cantidad > 0) {
                                 $('#cont-mensajes').html(datos.cantidad);
                                 visor.style.display = 'inline';
-                            }else{
+                            } else {
                                 visor.style.display = 'none';
                             }
                         }
@@ -104,13 +110,13 @@ and open the template in the editor.
                              otro elemento que se pueda ocultar al minimizar la barra -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">                            
                             <ul class="nav navbar-nav navbar-right">
-                                <li> <!--class='active'--><a href='administrarHome'>Inicio</a></li>
-                                <li><a href='administrarModelos'>Modelos</a></li>
-                                <li><a href='administrarQuienesSomos'>Quienes Somos</a></li>
-                                <li><a href='administrarContactanos'>Contactanos</a></li>
-                                <li><a href='administrarUsuarios'>Usuarios</a></li>
-                                <li><a href='administrarConsultas'>Consultas</a></li>
-                                <li><a href='administrarMensajes'>Mensajes<span id="cont-mensajes"class="badge"></span></a></li>
+                                <?php
+                                if ($perfil == 1) {
+                                    include '../Menus/Administrador.php';
+                                } else if ($perfil == 2) {
+                                    include '../Menus/Persona.php';
+                                }
+                                ?>
                             </ul>
                         </div>
                     </nav>
