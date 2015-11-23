@@ -182,57 +182,61 @@
     }
 
     function filtrar() {
-        $("#contenido-modelos").empty();
-        $('#fm-filtro').form('submit', {
-            url: "../Servlet/administrarCasa.php?accion=BUSCAR",
-            onSubmit: function () {
-                return $(this).form('validate');
-            },
-            success: function (datos) {
-                var datos = eval('(' + datos + ')');
-                var existen = false;
-                $.each(datos, function (k, v) {
-                    existen = true;
-                    var contenido = "<div class='col-sm-6 col-md-4'>";
-                    contenido += "<div class='thumbnail'>";
-                    contenido += "<img class='visualizacion' src='../../" + v.imagen.rutaImagen + "'>";
-                    contenido += "<div class='caption'>";
-                    contenido += "    <h3>" + v.nombreModelo + "</h3>";
-                    contenido += "    <div class='precio'>";
-                    contenido += "        <strong>Desde $ " + formatNumber.new(v.precioKit) + "</strong>";
-                    contenido += "    </div>";
-                    contenido += "    <section class='resDatos row'>";
-                    contenido += "        <section class='dato1 col-md-4'>";
-                    contenido += "            <figure><img src='../../Files/img/icon-dormitorios.png'></figure>";
-                    contenido += "            <p class='resDormitorios'>" + v.dormitorio + "</p>";
-                    contenido += "        </section>";
-                    contenido += "        <section class='dato2 col-md-4'>";
-                    contenido += "            <figure><img src='../../Files/img/icon-banios.png'></figure>";
-                    contenido += "            <p class='resBanios'>" + v.banio + "</p>";
-                    contenido += "        </section>";
-                    contenido += "        <section class='dato3 col-md-4' original-title=''>";
-                    contenido += "            <figure><img src='../../Files/img/icon-medidas.png'></figure>";
-                    contenido += "            <p class='resMetraje'>" + v.m2 + "m<sup>2</sup></p>";
-                    contenido += "        </section>";
-                    contenido += "    </section>";
-                    contenido += "    <section class='boton-conoce'>";
-                    contenido += "        <form action='administrarModelo' method='GET'>";
-                    contenido += "        <p><button type='submit' class='btn btn-warning'>Modificar</button>";
-                    contenido += "        <button type='button' class='btn btn-danger' data-toggle='modal' data-target='#detalle' onclick='borrar(" + v.idCasa + ")'>Eliminar</button></p>";
-                    contenido += "        <input type='hidden' name='idCasa' value='" + v.idCasa + "'>";
-                    contenido += "        <input type='hidden' name='accion' value='ACTUALIZAR'></form>";
-                    contenido += "    </section>";
-                    contenido += "</div>";
-                    contenido += "</div>";
-                    contenido += "</div>";
-                    $("#contenido-modelos").append(contenido);
-                });
+        if (validarFiltro()) {
+            $("#contenido-modelos").empty();
+            $('#fm-filtro').form('submit', {
+                url: "../Servlet/administrarCasa.php?accion=BUSCAR",
+                onSubmit: function () {
+                    return $(this).form('validate');
+                },
+                success: function (datos) {
+                    var datos = eval('(' + datos + ')');
+                    var existen = false;
+                    $.each(datos, function (k, v) {
+                        existen = true;
+                        var contenido = "<div class='col-sm-6 col-md-4'>";
+                        contenido += "<div class='thumbnail'>";
+                        contenido += "<img class='visualizacion' src='../../" + v.imagen.rutaImagen + "'>";
+                        contenido += "<div class='caption'>";
+                        contenido += "    <h3>" + v.nombreModelo + "</h3>";
+                        contenido += "    <div class='precio'>";
+                        contenido += "        <strong>Desde $ " + formatNumber.new(v.precioKit) + "</strong>";
+                        contenido += "    </div>";
+                        contenido += "    <section class='resDatos row'>";
+                        contenido += "        <section class='dato1 col-md-4'>";
+                        contenido += "            <figure><img src='../../Files/img/icon-dormitorios.png'></figure>";
+                        contenido += "            <p class='resDormitorios'>" + v.dormitorio + "</p>";
+                        contenido += "        </section>";
+                        contenido += "        <section class='dato2 col-md-4'>";
+                        contenido += "            <figure><img src='../../Files/img/icon-banios.png'></figure>";
+                        contenido += "            <p class='resBanios'>" + v.banio + "</p>";
+                        contenido += "        </section>";
+                        contenido += "        <section class='dato3 col-md-4' original-title=''>";
+                        contenido += "            <figure><img src='../../Files/img/icon-medidas.png'></figure>";
+                        contenido += "            <p class='resMetraje'>" + v.m2 + "m<sup>2</sup></p>";
+                        contenido += "        </section>";
+                        contenido += "    </section>";
+                        contenido += "    <section class='boton-conoce'>";
+                        contenido += "        <form action='administrarModelo' method='GET'>";
+                        contenido += "        <p><button type='submit' class='btn btn-warning'>Modificar</button>";
+                        contenido += "        <button type='button' class='btn btn-danger' data-toggle='modal' data-target='#detalle' onclick='borrar(" + v.idCasa + ")'>Eliminar</button></p>";
+                        contenido += "        <input type='hidden' name='idCasa' value='" + v.idCasa + "'>";
+                        contenido += "        <input type='hidden' name='accion' value='ACTUALIZAR'></form>";
+                        contenido += "    </section>";
+                        contenido += "</div>";
+                        contenido += "</div>";
+                        contenido += "</div>";
+                        $("#contenido-modelos").append(contenido);
+                    });
 
-                if (existen == false) {
-                    $("#contenido-modelos").append("No hay casas disponibles.");
+                    if (existen == false) {
+                        $("#contenido-modelos").append("No hay casas disponibles.");
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            mensaje("Error", "Datos ingresado en el fitro no validos.");
+        }
     }
 
     function borrar(id) {
@@ -251,6 +255,27 @@
                 mensaje('Error', result.errorMsg);
             }
         }, 'json');
+    }
+    
+    function validarFiltro() {
+        var precioDesde = document.getElementById("precioDesde").value;
+        var precioHasta = document.getElementById("precioHasta").value;
+        var superficieDesde = document.getElementById("superficieDesde").value;
+        var superficieHasta = document.getElementById("superficieHasta").value;
+        var valido = true;
+        if (isNaN(precioDesde)) {
+            valido = false;
+        }
+        if (isNaN(precioHasta)) {
+            valido = false;
+        }
+        if (isNaN(superficieDesde)) {
+            valido = false;
+        }
+        if (isNaN(superficieHasta)) {
+            valido = false;
+        }
+        return valido;
     }
 
     function mensaje(titulo, mensaje) {
