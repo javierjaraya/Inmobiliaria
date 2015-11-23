@@ -24,6 +24,29 @@ class CasaDAO {
             return 1;
         return $id;
     }
+    
+    public function getMaxPrecio() {
+        $this->conexion->conectar();
+        $query = "select max(precioKit) as maximo from casa";
+        $result = $this->conexion->ejecutar($query);
+        $maximo = 0;
+        while ($fila = mysql_fetch_assoc($result)) {
+            $maximo = $fila['maximo'];
+        }
+        return $maximo;
+    }
+    
+    public function getMaxM2() {
+        $this->conexion->conectar();
+        $query = "select max(m2) as maximo from casa";
+        $result = $this->conexion->ejecutar($query);
+        $maximo = 0;
+        while ($fila = mysql_fetch_assoc($result)) {
+            $maximo = $fila['maximo'];
+        }
+        return $maximo;
+    }
+    
     public function delete($idCasa) {
         $this->conexion->conectar();
         $query = "DELETE FROM casa WHERE  idCasa =  " . $idCasa . " ";
@@ -88,9 +111,9 @@ class CasaDAO {
         return $casa;
     }
 
-    public function findLikeAtrr($cadena) {
+    public function findLikeAtrr($precioDesde,$precioHasta,$superficieDesde,$superficieHasta,$dormDesde,$banosDesde) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM casa WHERE upper(nombreModelo) LIKE upper('" . $cadena . "') OR  upper(m2) LIKE upper(" . $cadena . ")  OR  upper(dormitorio) LIKE upper(" . $cadena . ")  OR  upper(banio) LIKE upper(" . $cadena . ")  OR  upper(precioKit) LIKE upper(" . $cadena . ")  OR  upper(precioKitPisoMadera) LIKE upper(" . $cadena . ")  OR  upper(precioKitPisoMaderaInstalado) LIKE upper(" . $cadena . ")  OR  upper(precioKitPisoRadierInstalado) LIKE upper(" . $cadena . ") ";
+        $query = "SELECT * FROM casa C JOIN imagen I ON C.idCasa = I.idCasa WHERE I.imagenPrincipal = 1 AND C.precioKit >= ".$precioDesde." AND C.precioKit <= ".$precioHasta." AND C.m2 >= ".$superficieDesde." AND C.m2 <= ".$superficieHasta." AND C.dormitorio >= ".$dormDesde." AND C.banio >= ".$banosDesde;
         $result = $this->conexion->ejecutar($query);
         $i = 0;
         $casas = array();
@@ -106,6 +129,16 @@ class CasaDAO {
             $casa->setPrecioKitPisoMaderaInstalado($fila['precioKitPisoMaderaInstalado']);
             $casa->setPrecioKitPisoRadierInstalado($fila['precioKitPisoRadierInstalado']);
             $casa->setEspecificacion($fila['especificacion']);
+            
+            $imagen = new ImagenDTO();
+            $imagen->setIdImagen($fila['idImagen']);
+            $imagen->setIdCasa($fila['idCasa']);
+            $imagen->setImagenPrincipal($fila['imagenPrincipal']);
+            $imagen->setNombreImagen($fila['nombreImagen']);
+            $imagen->setRutaImagen($fila['rutaImagen']);
+
+            $casa->setImagen($imagen);
+            
             $casas[$i] = $casa;
             $i++;
         }

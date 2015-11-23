@@ -4,66 +4,69 @@
     <div class="row">
         <div class="col-md-9">
             <div id="contenido-modelos" class="row">
-                
+
             </div>
         </div><!-- Fin Vista Modelos-->
+        <!-- FILTRO -->
         <div class="col-md-3 filtros well center-block">
-            <section id="bloqueTituloPrecio">
-                <p id="tituloPrecio">Precio:</p>
-                <div class="form-group">                
-                    <div class="input-group">
-                        <div class="input-group-addon">$</div>
-                        <input type="text" class="form-control" id="precioDesde" placeholder="Desde">                    
-                    </div>                
-                </div>            
-                <div class="form-group">                
-                    <div class="input-group">
-                        <div class="input-group-addon">$</div>
-                        <input type="text" class="form-control" id="precioHasta" placeholder="Hasta">                    
-                    </div>                
-                </div>   
-            </section>
-            <section id="bloqueTituloSuperficie">
-                <p id="tituloSuperficie">Superficie:</p>
-                <div class="form-group">                
-                    <div class="input-group">
-                        <div class="input-group-addon">m2</div>
-                        <input type="text" class="form-control" id="superficieDesde" placeholder="Desde">                    
-                        <div class="input-group-addon">.00</div>
-                    </div>                
-                </div>            
-                <div class="form-group">                
-                    <div class="input-group">
-                        <div class="input-group-addon">m2</div>
-                        <input type="text" class="form-control" id="superficieHasta" placeholder="Hasta">                    
-                        <div class="input-group-addon">.00</div>
-                    </div>                
-                </div>   
-            </section>
-            <section id="filtrosRango">
-                <span id="tituloDormitorios">Dormitorios:</span><br>
-                <input name="dormDesde" id="dormDesde" style="width:180px;margin-left:0px;" type="range" min="1" max="6" value="1" step="1" onchange=""><br>
-                <!-- <output id="rangevalue">1</output> -->
-                <!-- rangevalue.value=value -->
-                <p class="rangoNumero1">1+</p>
-                <p class="rangoNumero2">2+</p>
-                <p class="rangoNumero3">3+</p>
-                <p class="rangoNumero4">4+</p>
-                <p class="rangoNumero5">5+</p>
-                <p class="rangoNumero6">6+</p>
-                <br>
-                <br>
-                <span id="tituloBanos">Baños:</span><br>
-                <input name="banosDesde" id="banosDesde" style="width:180px;margin-left:0px;" type="range" min="1" max="6" value="1" step="1" onchange=""><br>
-                <p class="rangoNumero1">1+</p>
-                <p class="rangoNumero2">2+</p>
-                <p class="rangoNumero3">3+</p>
-                <p class="rangoNumero4">4+</p>
-                <p class="rangoNumero5">5+</p>
-                <p class="rangoNumero6">6+</p>
+            <form id="fm-filtro" method="POST">
+                <section id="bloqueTituloPrecio">
+                    <p id="tituloPrecio">Precio:</p>
+                    <div class="form-group">                
+                        <div class="input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="precioDesde" name="precioDesde" placeholder="Desde">                    
+                        </div>                
+                    </div>            
+                    <div class="form-group">                
+                        <div class="input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control" id="precioHasta" name="precioHasta" placeholder="Hasta">                    
+                        </div>                
+                    </div>   
+                </section>
+                <section id="bloqueTituloSuperficie">
+                    <p id="tituloSuperficie">Superficie:</p>
+                    <div class="form-group">                
+                        <div class="input-group">
+                            <div class="input-group-addon">m2</div>
+                            <input type="text" class="form-control" id="superficieDesde" name="superficieDesde" placeholder="Desde">                    
+                            <div class="input-group-addon">.00</div>
+                        </div>                
+                    </div>            
+                    <div class="form-group">                
+                        <div class="input-group">
+                            <div class="input-group-addon">m2</div>
+                            <input type="text" class="form-control" id="superficieHasta" name="superficieHasta" placeholder="Hasta">                    
+                            <div class="input-group-addon">.00</div>
+                        </div>                
+                    </div>   
+                </section>
+                <section id="filtrosRango">
+                    <span id="tituloDormitorios">Dormitorios:</span><br>
+                    <input name="dormDesde" id="dormDesde" style="width:180px;margin-left:0px;" type="range" min="1" max="6" value="1" step="1" onchange=""><br>
+                    <!-- <output id="rangevalue">1</output> -->
+                    <!-- rangevalue.value=value -->
+                    <p class="rangoNumero1">1+</p>
+                    <p class="rangoNumero2">2+</p>
+                    <p class="rangoNumero3">3+</p>
+                    <p class="rangoNumero4">4+</p>
+                    <p class="rangoNumero5">5+</p>
+                    <p class="rangoNumero6">6+</p>
+                    <br>
+                    <br>
+                    <span id="tituloBanos">Baños:</span><br>
+                    <input name="banosDesde" id="banosDesde" style="width:180px;margin-left:0px;" type="range" min="1" max="6" value="1" step="1" onchange=""><br>
+                    <p class="rangoNumero1">1+</p>
+                    <p class="rangoNumero2">2+</p>
+                    <p class="rangoNumero3">3+</p>
+                    <p class="rangoNumero4">4+</p>
+                    <p class="rangoNumero5">5+</p>
+                    <p class="rangoNumero6">6+</p>
 
-            </section>      
-            <button type="submit" class="btn btn-primary">Filtrar</button>          
+                </section>      
+                <button type="button" class="btn btn-primary" onclick="filtrar()">Filtrar</button>          
+            </form>         
         </div><!-- Fin Filtro-->
     </div><!-- Fin fila -->
 </div><!-- Fin container-->  
@@ -184,6 +187,60 @@
                 }
         );
     }
+
+    function filtrar() {
+        $("#contenido-modelos").empty();
+        $('#fm-filtro').form('submit', {
+            url: "Vista/Servlet/administrarCasa.php?accion=BUSCAR",
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (datos) {
+                var datos = eval('(' + datos + ')');
+                var existen = false;
+                $.each(datos, function (k, v) {
+                    existen = true;
+                    var contenido = "<div class='col-sm-6 col-md-4'>";
+                    contenido += "<div class='thumbnail'>";
+                    contenido += "<img src='" + v.imagen.rutaImagen + "'>";
+                    contenido += "<div class='caption'>";
+                    contenido += "    <h3>" + v.nombreModelo + "</h3>";
+                    contenido += "    <div class='precio'>";
+                    contenido += "        <strong>Desde $ " + formatNumber.new(v.precioKit) + "</strong>";
+                    contenido += "    </div>";
+                    contenido += "    <section class='resDatos row'>";
+                    contenido += "        <section class='dato1 col-md-4'>";
+                    contenido += "            <figure><img src='Files/img/icon-dormitorios.png'></figure>";
+                    contenido += "            <p class='resDormitorios'>" + v.dormitorio + "</p>";
+                    contenido += "        </section>";
+                    contenido += "        <section class='dato2 col-md-4'>";
+                    contenido += "            <figure><img src='Files/img/icon-banios.png'></figure>";
+                    contenido += "            <p class='resBanios'>" + v.banio + "</p>";
+                    contenido += "        </section>";
+                    contenido += "        <section class='dato3 col-md-4' original-title=''>";
+                    contenido += "            <figure><img src='Files/img/icon-medidas.png'></figure>";
+                    contenido += "            <p class='resMetraje'>" + v.m2 + "m<sup>2</sup></p>";
+                    contenido += "        </section>";
+                    contenido += "    </section>";
+                    contenido += "    <section class='boton-conoce'>";
+                    contenido += "        <form action='administrarModelo' method='GET'>";
+                    contenido += "        <p><button type='button' class='btn btn-success' data-toggle='modal' data-target='#detalle' onclick='cargarModal()'>Conoce más</button></p>";
+                    contenido += "        <input type='hidden' name='idCasa' value='" + v.idCasa + "'>";
+                    contenido += "        <input type='hidden' name='accion' value='MODIFICAR'></form>";
+                    contenido += "    </section>";
+                    contenido += "</div>";
+                    contenido += "</div>";
+                    contenido += "</div>";
+                    $("#contenido-modelos").append(contenido);
+                });
+
+                if (existen == false) {
+                    $("#contenido-modelos").append("No hay casas disponibles.");
+                }
+            }
+        });
+    }
+
 
     var formatNumber = {
         separador: ".", // separador para los miles

@@ -76,6 +76,14 @@ class Sistema {
         return $this->casaDAO->getID();
     }
 
+    public function getMaxPrecioCasa(){
+        return $this->casaDAO->getMaxPrecio();
+    }
+    
+    public function getMaxM2Casa(){
+        return $this->casaDAO->getMaxM2();
+    }
+
     public function getAllCasas() {
         return $this->casaDAO->findAll();
     }
@@ -96,8 +104,8 @@ class Sistema {
         return $this->casaDAO->findByID($idCasa);
     }
 
-    public function getCasaLikeAtrr($cadena) {
-        return $this->casaDAO->findLikeAtrr($cadena);
+    public function getCasaLikeAtrr($precioDesde,$precioHasta,$superficieDesde,$superficieHasta,$dormDesde,$banosDesde) {
+        return $this->casaDAO->findLikeAtrr($precioDesde,$precioHasta,$superficieDesde,$superficieHasta,$dormDesde,$banosDesde);
     }
 
     public function getAllConsultas() {

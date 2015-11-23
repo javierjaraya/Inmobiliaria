@@ -130,8 +130,25 @@ if ($accion != null) {
             echo json_encode(array('errorMsg' => "Ha ocurrido un error."));
         }
     } else if ($accion == "BUSCAR") {
-        $cadena = htmlspecialchars($_REQUEST['cadena']);
-        $casas = $control->getCasaLikeAtrr($cadena);
+        $precioDesde = htmlspecialchars($_REQUEST['precioDesde']);
+        $precioHasta = htmlspecialchars($_REQUEST['precioHasta']);
+        $superficieDesde = htmlspecialchars($_REQUEST['superficieDesde']);
+        $superficieHasta = htmlspecialchars($_REQUEST['superficieHasta']);
+        $dormDesde = htmlspecialchars($_REQUEST['dormDesde']);
+        $banosDesde = htmlspecialchars($_REQUEST['banosDesde']);
+        
+        if($precioDesde == "") $precioDesde = 0;
+        if($precioHasta == ""){
+            $precioHasta = $control->getMaxPrecioCasa();
+        }
+        if($superficieDesde == "") $superficieDesde = 0;
+        if($superficieHasta == ""){
+            $superficieHasta = $control->getMaxM2Casa();
+        }
+        if($dormDesde == "") $dormDesde = 0;
+        if($banosDesde == "") $banosDesde = 0;
+        
+        $casas = $control->getCasaLikeAtrr($precioDesde,$precioHasta,$superficieDesde,$superficieHasta,$dormDesde,$banosDesde);
         $json = json_encode($casas);
         echo $json;
     } else if ($accion == "BUSCAR_BY_ID") {
