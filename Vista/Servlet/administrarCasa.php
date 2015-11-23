@@ -58,9 +58,13 @@ if ($accion != null) {
                             } else {
                                 $imagen->setImagenPrincipal(0);
                             }
+
+                            $valor = ($_FILES["imagen"]["size"][$i] / 1024) / 1024;
+                            $tamaño = round($valor, 2, PHP_ROUND_HALF_UP);
+
                             $imagen->setNombreImagen($nombreImagen);
                             $imagen->setRutaImagen("Files/img/modelos/" . $nombreImagen);
-                            $imagen->setTamaño($_FILES['imagen']['size'][$i] . " bytes");
+                            $imagen->setTamaño($tamaño . " Mb");
 
                             $result = $control->addImagen($imagen); //Registramos la imagen en la BD
                         }
@@ -78,10 +82,13 @@ if ($accion != null) {
                         if ($respuesta == true) {
                             $plano = new PlanoDTO();
                             $plano->setIdCasa($idCasa);
-
+                            
+                            $valor = ($_FILES["planos"]["size"][$i] / 1024) / 1024;
+                            $tamaño = round($valor, 2, PHP_ROUND_HALF_UP);
+                            
                             $plano->setNombreImagen($nombreImagen);
                             $plano->setRutaImagen("Files/img/planos/" . $nombreImagen);
-                            $plano->setTamaño($_FILES['imagen']['size'][$i] . " bytes");
+                            $plano->setTamaño($tamaño . " Mb");
 
                             $result = $control->addPlano($plano); //Registramos el plano en la BD
                         }
@@ -93,13 +100,13 @@ if ($accion != null) {
                         'mensaje' => "Casa ingresada correctamente"
                     ));
                 } else {
-                    echo json_encode(array('success' => false,'errorMsg' => 'Ha ocurrido un error.'));
+                    echo json_encode(array('success' => false, 'errorMsg' => 'Ha ocurrido un error.'));
                 }
             } else {
-                echo json_encode(array('success' => false,'errorMsg' => 'Algunas imagenes exceden el tamaño maximo permitido.'));
+                echo json_encode(array('success' => false, 'errorMsg' => 'Algunas imagenes exceden el tamaño maximo permitido.'));
             }
         } else {
-            echo json_encode(array('success' => false,'errorMsg' => 'Algunos planos exceden el tamaño maximo permitido.'));
+            echo json_encode(array('success' => false, 'errorMsg' => 'Algunos planos exceden el tamaño maximo permitido.'));
         }
     } else if ($accion == "BORRAR") {
         $idCasa = htmlspecialchars($_REQUEST['idCasa']);

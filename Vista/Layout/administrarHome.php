@@ -59,7 +59,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-success" onclick="guardarUsuario()">Agregar</button>
+                            <button type="button" class="btn btn-success" onclick="guardarBanner()">Agregar</button>
                         </div>
                     </form>
                 </section>
@@ -188,7 +188,7 @@
         $('#dg-modela').modal(this)//CALL MODAL MENSAJE
     }
 
-    function guardarUsuario() {
+    function guardarBanner() {
         if (validarFormulario()) {
             $('#fm').form('submit', {
                 url: "../Servlet/administrarBanner.php",

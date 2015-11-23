@@ -192,7 +192,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             </div>
         </div>
     </div><!-- END MODAL MENSAJE-->
-    
+
     <!-- MODAL CONFIRMACION IMAGEN-->
     <div class="modal fade bs-example-modal-sm" id="dg-confirmacion-imagen" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
@@ -221,7 +221,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             </div>
         </div>
     </div><!-- END MODAL CONFIRMACION IMAGEN-->
-    
+
     <!-- MODAL CONFIRMACION PLANO-->
     <div class="modal fade bs-example-modal-sm" id="dg-confirmacion-plano" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
@@ -249,8 +249,45 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                 </section>
             </div>
         </div>
-    </div><!-- END MODAL CONFIRMACION IMAGEN-->
-    
+    </div><!-- END MODAL CONFIRMACION PLANO-->
+
+    <!-- DIALOGO MODAL-->
+    <div class="modal fade bs-example-modal-sm" id="dg-modela" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <section id="panel-modal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img id="logo-modal" src="../../Files/img/logo.jpg" width="100px">
+                        <label class="titulo-modal"><h4 class="modal-title" id="modalLabel"></h4></label>
+                    </div>
+                    <form id="fm-imagen" enctype="multipart/form-data" method="post" >
+                        <div class="modal-body">
+                            <section class="row">                            
+                                <section class="col-md-12">
+                                    <div id="nueva-imagenGroup" class="form-group has-feedback">
+                                        <label class="control-label" for="nueva-imagen">Imagen (Maximo 2 Mb)</label>
+                                        <input type="file" class="form-control" id="nueva-imagen" name="nueva-imagen">
+                                        <span id="nueva-imagenIco" class="glyphicon form-control-feedback" aria-hidden="true"></span>                                        
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label class="control-label">Tamaño:</label>
+                                        <div id="detalle-imagen"></div>
+                                    </div>
+                                    <input type="hidden" value="" name="esPlano" id="esPlano">
+                                </section>                         
+                            </section><!-- Fin Row-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-success" onclick="guardarImagen()">Agregar</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div><!-- END DIALOGO MODAL-->
+
 </div>   
 <script type="text/javascript">
     var areaTexto;
@@ -279,6 +316,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
 
     var tamañoImagenesPermitido;
     var tamañoPlanosPermitido;
+    var tamañoNuevaImagenPermitido;
     function tamañoImagenes(evt) {
         tamañoImagenesPermitido = true;
         $("#visor-imagenes").html("");
@@ -322,9 +360,33 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                 cambiarEstado("planos", false);
             }
         }
+    }    
+    function tamañoNuevaImagen(evt) {
+        tamañoNuevaImagenPermitido = true;
+        $("#detalle-imagen").html("");
+        var archivos = evt.target.files;
+        for (var i = 0, f; f = archivos[i]; i++) {
+            var ta = redondeoDecimales((f.size / 1024) / 1024, 2);
+            if (typePermitido(f.type) == true) {
+                if (f.size <= 2000000) {
+                    cambiarEstado("nueva-imagen", true);
+                    $("#detalle-imagen").append("" + f.name + " : (" + ta + " Mb) Tamaño permitido<br>");
+                } else {
+                    $("#detalle-imagen").append(f.name + " : (" + ta + " Mb) Tamaño no permitido<br>");
+                    tamañoNuevaImagenPermitido = false;
+                    cambiarEstado("nueva-imagen", false);
+                }
+            } else {
+                $("#detalle-imagen").append(f.name + " : (" + ta + " Mb) Archivo no permitido<br>");
+                tamañoNuevaImagenPermitido = false;
+                cambiarEstado("nueva-imagen", false);
+            }
+        }
     }
+    
     document.getElementById('imagen').addEventListener('change', tamañoImagenes, false);
     document.getElementById('planos').addEventListener('change', tamañoPlanos, false);
+    document.getElementById('nueva-imagen').addEventListener('change', tamañoNuevaImagen, false);
 
     function guardarModelo(evt) {
         var especificacion = getAreaText("especificacion");
@@ -338,9 +400,11 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                 success: function (result) {
                     var result = eval('(' + result + ')');
                     if (result.success) {
-                        //$('#fm').empty();
                         mensaje('Exito', result.mensaje);
-                        //location.href = "administrarModelos";
+                        var accion = document.getElementById('accionRecibida').value;
+                        if (accion == "AGREGAR") {
+                            location.href = "administrarModelos";
+                        }
                     } else {
                         mensaje('Error', result.errorMsg);
                     }
@@ -353,7 +417,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
 
     function cargarDatos(idCasa) {
         //CARGAR FORMULARIO
-        var url_json = '../Servlet/administrarCasa.php?accion=BUSCAR_BY_ID&idCasa=' + idCasa;        
+        var url_json = '../Servlet/administrarCasa.php?accion=BUSCAR_BY_ID&idCasa=' + idCasa;
         $.getJSON(
                 url_json,
                 function (data) {
@@ -365,7 +429,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
         cargarTablaPlanos(idCasa);
     }
 
-    function cargarTablaImagenes(idCasa){
+    function cargarTablaImagenes(idCasa) {
         //CARGAR IMAGENES
         var url_json_imagen = '../Servlet/administrarImagen.php?accion=BUSCAR_BY_ID_CASA&idCasa=' + idCasa;
         $("#body-table-imagen").empty();
@@ -377,7 +441,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                         var contenido = "<tr>";
                         contenido += "<td width='100px'><img src='../../" + v.rutaImagen + "' width='90px'></td>";
                         contenido += "<td>" + v.nombreImagen + "</td>";
-                        contenido += "<td>" + v.tamanio + "</td>";
+                        contenido += "<td>" + v.tamaño + "</td>";
                         contenido += "<td width='60px'>";
                         contenido += "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='borrarImagen(" + v.idImagen + ")'></button>";
                         contenido += "</td>";
@@ -388,8 +452,8 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                 }
         );
     }
-    
-    function cargarTablaPlanos(idCasa){
+
+    function cargarTablaPlanos(idCasa) {
         //CARGAR PLANOS
         var url_json_plano = '../Servlet/administrarPlano.php?accion=BUSCAR_BY_ID_CASA&idCasa=' + idCasa;
         $("#body-table-planos").empty();
@@ -401,7 +465,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                         var contenido = "<tr>";
                         contenido += "<td width='100px'><img src='../../" + v.rutaImagen + "' width='90px'></td>";
                         contenido += "<td>" + v.nombreImagen + "</td>";
-                        contenido += "<td>" + v.tamanio + "</td>";
+                        contenido += "<td>" + v.tamaño + "</td>";
                         contenido += "<td width='60px'>";
                         contenido += "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='borrarPlano(" + v.idPlano + ")'></button>";
                         contenido += "</td>";
@@ -412,7 +476,62 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                 }
         );
     }
-    
+
+    function agregarImagen() {
+        document.getElementById("fm-imagen").reset();        
+        document.getElementById('esPlano').value = "NO";
+        document.getElementById('detalle-imagen').innerHTML = "";        
+        resetearFormulario('nueva-imagen');
+        $('#modalLabel').html("Agregar Imagen");
+        $('#dg-modela').modal(this)//CALL MODAL MENSAJE
+    }
+
+    function agregarPlanos() {
+        document.getElementById("fm-imagen").reset();
+        document.getElementById('esPlano').value = "SI";
+        document.getElementById('detalle-imagen').innerHTML = "";
+        resetearFormulario('nueva-imagen');
+        $('#modalLabel').html("Agregar Plano");
+        $('#dg-modela').modal(this)//CALL MODAL MENSAJE
+    }
+
+    function guardarImagen() {
+        var idCasa = document.getElementById("idCasaRecibida").value;
+        var esPlano = document.getElementById('esPlano').value;
+        var url = "";
+        if(esPlano  == "SI"){
+            url = "../Servlet/administrarPlano.php?idCasa="+idCasa+"&accion=AGREGAR";
+        }else{
+            url = "../Servlet/administrarImagen.php?idCasa="+idCasa+"&accion=AGREGAR";
+        }
+        if (tamañoNuevaImagenPermitido == true) {            
+            $('#fm-imagen').form('submit', {
+                url: url,
+                onSubmit: function () {
+                    return $(this).form('validate');
+                },
+                success: function (result) {                    
+                    var result = eval('(' + result + ')');
+                    if (result.success) {
+                        $('#dg-modela').modal('toggle'); //Cerrar Modal
+                        if(esPlano == "SI"){
+                            cargarTablaPlanos(idCasa);//Refrescamos la tabla
+                        }else{
+                            cargarTablaImagenes(idCasa);//Refrescamos la tabla
+                        }
+                        mensaje('Exito', result.mensaje);
+                    } else {
+                        $('#dg-modela').modal('toggle'); //Cerrar Modal
+                        mensaje('Error', result.errorMsg);
+                    }
+                }
+            });
+        } else {
+            $('#dg-modela').modal('toggle'); //Cerrar Modal
+            mensaje('Aviso', "Debe seleccionar una imagen que no supere los 2 Mb.");
+        }
+    }
+
     function borrarImagen(idImagen) {
         confirmacionImagen('Confirmacion', '¿Esta seguro?, una vez eliminado no se podran recuperar los datos.');
         document.getElementById('idImagenEliminar').value = idImagen;
@@ -422,13 +541,13 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
         confirmacionPlano('Confirmacion', '¿Esta seguro?, una vez eliminado no se podran recuperar los datos.');
         document.getElementById('idPlanoEliminar').value = idPlano;
     }
-    
+
     function confirmacionImagen(titulo, mensaje) {
         $('#titulo-mensaje-imagen').html(titulo);
         $('#contenedor-confirmacion-imagen').html(mensaje);
         $('#dg-confirmacion-imagen').modal(this)//CALL MODAL MENSAJE
     }
-    
+
     function confirmacionPlano(titulo, mensaje) {
         $('#titulo-mensaje-plano').html(titulo);
         $('#contenedor-confirmacion-plano').html(mensaje);
@@ -438,8 +557,10 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
     function confirmarBorrarImagen() {
         var idImagen = document.getElementById('idImagenEliminar').value;
         var idCasa = document.getElementById('idCasa').value;
-        $.post('../Servlet/administrarImagen.php?accion=BORRAR', {idImagen: idImagen, idCasa: idCasa}, function (result) {
-            if (result.success) {               
+        
+        $.post('../Servlet/administrarImagen.php?accion=BORRAR', {idImagen: idImagen, idCasa: idCasa}, 
+        function (result) {
+            if (result.success) {
                 $('#dg-confirmacion-imagen').modal('toggle'); //Cerrar Modal
                 cargarTablaImagenes(idCasa); //Refrescamos la tabla
                 mensaje('Exito', result.mensaje);
@@ -449,7 +570,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             }
         }, 'json');
     }
-    
+
     function confirmarBorrarPlano() {
         var idPlano = document.getElementById('idPlanoEliminar').value;
         var idCasa = document.getElementById('idCasa').value;
@@ -464,7 +585,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             }
         }, 'json');
     }
-    
+
     function validar(tipo, nombre) {
         var contenido = document.getElementById(nombre).value;
         if (tipo == 'text') {
@@ -601,6 +722,13 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             }
         }
         return false;
+    }
+    
+    function resetearFormulario(nombre) {
+        $('#'+nombre+'Group').removeClass('has-error');
+        $('#'+nombre+'Ico').removeClass('glyphicon-remove');
+        $('#'+nombre+'Group').removeClass('has-success');
+        $('#'+nombre+'Ico').removeClass('glyphicon-ok');
     }
 
 </script>

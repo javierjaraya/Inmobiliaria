@@ -29,6 +29,7 @@ class PlanoDAO{
             $plano->setIdCasa($fila['idCasa']);
             $plano->setNombreImagen($fila['nombreImagen']);
             $plano->setRutaImagen($fila['rutaImagen']);
+            $plano->setTamaño($fila['tamanio']);
             $planos[$i] = $plano;
             $i++;
         }
@@ -46,6 +47,7 @@ class PlanoDAO{
             $plano->setIdCasa($fila['idCasa']);
             $plano->setNombreImagen($fila['nombreImagen']);
             $plano->setRutaImagen($fila['rutaImagen']);
+            $plano->setTamaño($fila['tamanio']);
         }
         $this->conexion->desconectar();
         return $plano;
@@ -63,6 +65,7 @@ class PlanoDAO{
             $plano->setIdCasa($fila['idCasa']);
             $plano->setNombreImagen($fila['nombreImagen']);
             $plano->setRutaImagen($fila['rutaImagen']);
+            $plano->setTamaño($fila['tamanio']);
             $planos[$i] = $plano;
             $i++;
         }
@@ -82,6 +85,7 @@ class PlanoDAO{
             $plano->setIdCasa($fila['idCasa']);
             $plano->setNombreImagen($fila['nombreImagen']);
             $plano->setRutaImagen($fila['rutaImagen']);
+            $plano->setTamaño($fila['tamanio']);
             $planos[$i] = $plano;
             $i++;
         }
@@ -91,8 +95,8 @@ class PlanoDAO{
 
     public function save($plano) {
         $this->conexion->conectar();
-        $query = "INSERT INTO plano (idCasa,nombreImagen,rutaImagen)"
-                . " VALUES (".$plano->getIdCasa()." , '".$plano->getNombreImagen()."' , '".$plano->getRutaImagen()."' )";
+        $query = "INSERT INTO plano (idCasa,nombreImagen,rutaImagen,tamanio)"
+                . " VALUES (".$plano->getIdCasa()." , '".$plano->getNombreImagen()."' , '".$plano->getRutaImagen()."' , '".$plano->getTamaño()."' )";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
@@ -103,7 +107,8 @@ class PlanoDAO{
         $query = "UPDATE plano SET "
                 . "  idCasa =  ".$plano->getIdCasa()." ,"
                 . "  nombreImagen = '".$plano->getNombreImagen()."' ,"
-                . "  rutaImagen = '".$plano->getRutaImagen()."' "
+                . "  rutaImagen = '".$plano->getRutaImagen()."' ,"
+                . "  tamanio = '".$plano->getTamaño()."' "
                 . " WHERE  idPlano =  ".$plano->getIdPlano()." ";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();

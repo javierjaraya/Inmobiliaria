@@ -30,6 +30,7 @@ class ImagenDAO{
             $imagen->setImagenPrincipal($fila['imagenPrincipal']);
             $imagen->setNombreImagen($fila['nombreImagen']);
             $imagen->setRutaImagen($fila['rutaImagen']);
+            $imagen->setTamaño($fila['tamanio']);
             $imagens[$i] = $imagen;
             $i++;
         }
@@ -48,6 +49,7 @@ class ImagenDAO{
             $imagen->setImagenPrincipal($fila['imagenPrincipal']);
             $imagen->setNombreImagen($fila['nombreImagen']);
             $imagen->setRutaImagen($fila['rutaImagen']);
+            $imagen->setTamaño($fila['tamanio']);
         }
         $this->conexion->desconectar();
         return $imagen;
@@ -66,6 +68,7 @@ class ImagenDAO{
             $imagen->setImagenPrincipal($fila['imagenPrincipal']);
             $imagen->setNombreImagen($fila['nombreImagen']);
             $imagen->setRutaImagen($fila['rutaImagen']);
+            $imagen->setTamaño($fila['tamanio']);
             $imagens[$i] = $imagen;
             $i++;
         }
@@ -86,6 +89,7 @@ class ImagenDAO{
             $imagen->setImagenPrincipal($fila['imagenPrincipal']);
             $imagen->setNombreImagen($fila['nombreImagen']);
             $imagen->setRutaImagen($fila['rutaImagen']);
+            $imagen->setTamaño($fila['tamanio']);
             $imagens[$i] = $imagen;
             $i++;
         }
@@ -95,8 +99,8 @@ class ImagenDAO{
 
     public function save($imagen) {
         $this->conexion->conectar();
-        $query = "INSERT INTO imagen (idCasa,imagenPrincipal,nombreImagen,rutaImagen)"
-                . " VALUES (".$imagen->getIdCasa()." ,  ".$imagen->getImagenPrincipal()." , '".$imagen->getNombreImagen()."' , '".$imagen->getRutaImagen()."' )";
+        $query = "INSERT INTO imagen (idCasa,imagenPrincipal,nombreImagen,rutaImagen,tamanio)"
+                . " VALUES (".$imagen->getIdCasa()." ,  ".$imagen->getImagenPrincipal()." , '".$imagen->getNombreImagen()."' , '".$imagen->getRutaImagen()."' , '".$imagen->getTamaño()."' )";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
@@ -108,7 +112,8 @@ class ImagenDAO{
                 . "  idCasa =  ".$imagen->getIdCasa()." ,"
                 . "  imagenPrincipal =  ".$imagen->getImagenPrincipal()." ,"
                 . "  nombreImagen = '".$imagen->getNombreImagen()."' ,"
-                . "  rutaImagen = '".$imagen->getRutaImagen()."' "
+                . "  rutaImagen = '".$imagen->getRutaImagen()."' ,"
+                . "  tamanio = '".$imagen->getTamaño()."' "
                 . " WHERE  idImagen =  ".$imagen->getIdImagen()." ";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
