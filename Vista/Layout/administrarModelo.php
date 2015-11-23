@@ -2,16 +2,16 @@
 <?php
 
 $accion = htmlspecialchars($_REQUEST['accion']);
-if ($accion == "MODIFICAR") {
+if ($accion == "ACTUALIZAR") {
     $idCasa = htmlspecialchars($_REQUEST['idCasa']);
     echo "<input type='hidden' id='idCasaRecibida' name='idCasaRecibida' value='" . $idCasa . "'>";
 }
 echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . $accion . "'>";
 ?>
 <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-<div class="container"> 
-    <form id="fm" method="POST" enctype="multipart/form-data">
-        <div class="tabla-principal">        
+<div class="container">     
+    <div class="tabla-principal">        
+        <form id="fm" method="POST" enctype="multipart/form-data">
             <section class="row">
                 <section class="toalbar-table" style="padding-left: 35px;">
                     <button type="button" class="btn btn-success btn-sm" onclick="guardarModelo()">Publicar</button>
@@ -115,61 +115,60 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                 </section>
             </section>
             <!-- FIN Seccion Nuevas Imagenes -->
-            <!-- Seccion edicion imagenes-->
-            <section id="seccion-imagenes" class="row" style="display: none;">
-                <!-- Tabla imagenes-->
-                <section class="col-md-6">
-                    <section class="toalbar-table">
-                        <label class="control-label" for="imagenes">Imagenes</label>
-                        <button class="btn btn-success btn-sm glyphicon glyphicon glyphicon-plus" onClick="agregarImagen()"></button>
-                    </section>
-                    <div class="table-responsive">
-                        <table id="tabla-imagen" name="table-imagen" class="table table-hover table table-striped table-bordered bootstrap-datatable dataTable" data-toggle="table-imagen">
-                            <thead>
-                                <tr>
-                                    <th data-field="miniatura">Miniatura</th>
-                                    <th data-field="nombre">Nombre</th>                                
-                                    <th data-field="tamaño">Tamaño</th>
-                                    <th data-field="accion">Accion</th>
-                                </tr>
-                            </thead>
-                            <tbody id="body-table-imagen" name="body-table-imagen">
-
-                            </tbody>
-                        </table>
-                    </div>
+            <input type="hidden" id="accion" name="accion">
+            <input type="hidden" id="idCasa" name="idCasa">
+        </form>
+        <!-- Seccion edicion imagenes-->
+        <section id="seccion-imagenes" class="row" style="display: none;">
+            <!-- Tabla imagenes-->
+            <section class="col-md-6">
+                <section class="toalbar-table">
+                    <label class="control-label" for="imagenes">Imagenes</label>
+                    <button class="btn btn-success btn-sm glyphicon glyphicon glyphicon-plus" onClick="agregarImagen()"></button>
                 </section>
-                <!-- FIN Tabla imagenes-->
-                <!-- Tabla Planos-->
-                <section class="col-md-6">
-                    <section class="toalbar-table">
-                        <label class="control-label" for="planos">Planos</label>
-                        <button class="btn btn-success btn-sm glyphicon glyphicon glyphicon-plus" onClick="agregarPlanos()"></button>
-                    </section>
-                    <div class="table-responsive">
-                        <table id="tabla-planos" name="table-planos" class="table table-hover table table-striped table-bordered bootstrap-datatable dataTable" data-toggle="table-planos">
-                            <thead>
-                                <tr>
-                                    <th data-field="miniatura">Miniatura</th>
-                                    <th data-field="nombre">Nombre</th>                                
-                                    <th data-field="tamaño">Tamaño</th>
-                                    <th data-field="accion">Accion</th>
-                                </tr>
-                            </thead>
-                            <tbody id="body-table-planos" name="body-table-planos">
+                <div class="table-responsive">
+                    <table id="tabla-imagen" name="table-imagen" class="table table-hover table table-striped table-bordered bootstrap-datatable dataTable" data-toggle="table-imagen">
+                        <thead>
+                            <tr>
+                                <th data-field="miniatura">Miniatura</th>
+                                <th data-field="nombre">Nombre</th>                                
+                                <th data-field="tamaño">Tamaño</th>
+                                <th data-field="accion">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-table-imagen" name="body-table-imagen">
 
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-                <!-- FIN Tabla planos-->
+                        </tbody>
+                    </table>
+                </div>
             </section>
-            <!-- FIN Seccion edicion imagenes-->
-        </div>        
-        <input type="hidden" id="accion" name="accion">
-        <input type="hidden" id="idCasa" name="idCasa">
-    </form>
+            <!-- FIN Tabla imagenes-->
+            <!-- Tabla Planos-->
+            <section class="col-md-6">
+                <section class="toalbar-table">
+                    <label class="control-label" for="planos">Planos</label>
+                    <button class="btn btn-success btn-sm glyphicon glyphicon glyphicon-plus" onClick="agregarPlanos()"></button>
+                </section>
+                <div class="table-responsive">
+                    <table id="tabla-planos" name="table-planos" class="table table-hover table table-striped table-bordered bootstrap-datatable dataTable" data-toggle="table-planos">
+                        <thead>
+                            <tr>
+                                <th data-field="miniatura">Miniatura</th>
+                                <th data-field="nombre">Nombre</th>                                
+                                <th data-field="tamaño">Tamaño</th>
+                                <th data-field="accion">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-table-planos" name="body-table-planos">
 
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- FIN Tabla planos-->
+        </section>
+        <!-- FIN Seccion edicion imagenes-->
+    </div>                
     <!-- MODAL MENSAJE-->
     <div class="modal fade bs-example-modal-sm" id="dg-mensaje" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm">
@@ -193,6 +192,65 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             </div>
         </div>
     </div><!-- END MODAL MENSAJE-->
+    
+    <!-- MODAL CONFIRMACION IMAGEN-->
+    <div class="modal fade bs-example-modal-sm" id="dg-confirmacion-imagen" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <section id="panel-modal-imagen">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img src="../../Files/img/iconoInformacion.png" width="30px">
+                        <label class="titulo-modal"><h4 class="modal-title" id="titulo-mensaje-imagen"></h4></label>
+                    </div>
+                    <div class="modal-body">
+                        <section class="row">
+                            <section class="col-md-12">
+                                <div id="contenedor-confirmacion-imagen">
+
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" onclick="confirmarBorrarImagen()">Borrar</button>
+                        <input type="hidden" value="" id="idImagenEliminar" name="idImagen">
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div><!-- END MODAL CONFIRMACION IMAGEN-->
+    
+    <!-- MODAL CONFIRMACION PLANO-->
+    <div class="modal fade bs-example-modal-sm" id="dg-confirmacion-plano" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <section id="panel-modal-plano">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img src="../../Files/img/iconoInformacion.png" width="30px">
+                        <label class="titulo-modal"><h4 class="modal-title" id="titulo-mensaje-plano"></h4></label>
+                    </div>
+                    <div class="modal-body">
+                        <section class="row">
+                            <section class="col-md-12">
+                                <div id="contenedor-confirmacion-plano">
+
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" onclick="confirmarBorrarPlano()">Borrar</button>
+                        <input type="hidden" value="" id="idPlanoEliminar" name="idPlano">
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div><!-- END MODAL CONFIRMACION IMAGEN-->
+    
 </div>   
 <script type="text/javascript">
     var areaTexto;
@@ -210,6 +268,13 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
     $(document).ready(function () {
         var accion = document.getElementById('accionRecibida').value;
         document.getElementById('accion').value = accion;
+        if (accion == "ACTUALIZAR") {
+            var idCasa = document.getElementById('idCasaRecibida').value;
+            document.getElementById('idCasa').value = idCasa;
+            cargarDatos(idCasa);
+            document.getElementById('seccion-nuevas-imagenes').style.display = 'none';
+            document.getElementById('seccion-imagenes').style.display = 'inline';
+        }
     });
 
     var tamañoImagenesPermitido;
@@ -273,9 +338,9 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
                 success: function (result) {
                     var result = eval('(' + result + ')');
                     if (result.success) {
-                        $('#fm').empty();
+                        //$('#fm').empty();
                         mensaje('Exito', result.mensaje);
-                        location.href = "administrarModelos";
+                        //location.href = "administrarModelos";
                     } else {
                         mensaje('Error', result.errorMsg);
                     }
@@ -286,20 +351,120 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
         }
     }
 
-    function cargarDatos() {
-        /*
-         var url_json = '../Servlet/administrarEmpresa.php?accion=LISTADO';
-         $("#areaTexto").empty();
-         $.getJSON(
-         url_json,
-         function (data) {
-         $('#areaTexto').html(data.quienesSomos);
-         
-         }
-         );
-         */
+    function cargarDatos(idCasa) {
+        //CARGAR FORMULARIO
+        var url_json = '../Servlet/administrarCasa.php?accion=BUSCAR_BY_ID&idCasa=' + idCasa;        
+        $.getJSON(
+                url_json,
+                function (data) {
+                    $('#fm').form('load', data);
+                    setAreaText("especificacion", data.especificacion);
+                }
+        );
+        cargarTablaImagenes(idCasa);
+        cargarTablaPlanos(idCasa);
     }
 
+    function cargarTablaImagenes(idCasa){
+        //CARGAR IMAGENES
+        var url_json_imagen = '../Servlet/administrarImagen.php?accion=BUSCAR_BY_ID_CASA&idCasa=' + idCasa;
+        $("#body-table-imagen").empty();
+        $.getJSON(
+                url_json_imagen,
+                function (data) {
+                    var i = 0;
+                    $.each(data, function (k, v) {
+                        var contenido = "<tr>";
+                        contenido += "<td width='100px'><img src='../../" + v.rutaImagen + "' width='90px'></td>";
+                        contenido += "<td>" + v.nombreImagen + "</td>";
+                        contenido += "<td>" + v.tamanio + "</td>";
+                        contenido += "<td width='60px'>";
+                        contenido += "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='borrarImagen(" + v.idImagen + ")'></button>";
+                        contenido += "</td>";
+                        contenido += "</tr>";
+                        $("#body-table-imagen").append(contenido);
+                        i++;
+                    });
+                }
+        );
+    }
+    
+    function cargarTablaPlanos(idCasa){
+        //CARGAR PLANOS
+        var url_json_plano = '../Servlet/administrarPlano.php?accion=BUSCAR_BY_ID_CASA&idCasa=' + idCasa;
+        $("#body-table-planos").empty();
+        $.getJSON(
+                url_json_plano,
+                function (data) {
+                    var i = 0;
+                    $.each(data, function (k, v) {
+                        var contenido = "<tr>";
+                        contenido += "<td width='100px'><img src='../../" + v.rutaImagen + "' width='90px'></td>";
+                        contenido += "<td>" + v.nombreImagen + "</td>";
+                        contenido += "<td>" + v.tamanio + "</td>";
+                        contenido += "<td width='60px'>";
+                        contenido += "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='borrarPlano(" + v.idPlano + ")'></button>";
+                        contenido += "</td>";
+                        contenido += "</tr>";
+                        $("#body-table-planos").append(contenido);
+                        i++;
+                    });
+                }
+        );
+    }
+    
+    function borrarImagen(idImagen) {
+        confirmacionImagen('Confirmacion', '¿Esta seguro?, una vez eliminado no se podran recuperar los datos.');
+        document.getElementById('idImagenEliminar').value = idImagen;
+    }
+
+    function borrarPlano(idPlano) {
+        confirmacionPlano('Confirmacion', '¿Esta seguro?, una vez eliminado no se podran recuperar los datos.');
+        document.getElementById('idPlanoEliminar').value = idPlano;
+    }
+    
+    function confirmacionImagen(titulo, mensaje) {
+        $('#titulo-mensaje-imagen').html(titulo);
+        $('#contenedor-confirmacion-imagen').html(mensaje);
+        $('#dg-confirmacion-imagen').modal(this)//CALL MODAL MENSAJE
+    }
+    
+    function confirmacionPlano(titulo, mensaje) {
+        $('#titulo-mensaje-plano').html(titulo);
+        $('#contenedor-confirmacion-plano').html(mensaje);
+        $('#dg-confirmacion-plano').modal(this)//CALL MODAL MENSAJE
+    }
+
+    function confirmarBorrarImagen() {
+        var idImagen = document.getElementById('idImagenEliminar').value;
+        var idCasa = document.getElementById('idCasa').value;
+        $.post('../Servlet/administrarImagen.php?accion=BORRAR', {idImagen: idImagen, idCasa: idCasa}, function (result) {
+            if (result.success) {               
+                $('#dg-confirmacion-imagen').modal('toggle'); //Cerrar Modal
+                cargarTablaImagenes(idCasa); //Refrescamos la tabla
+                mensaje('Exito', result.mensaje);
+            } else {
+                $('#dg-confirmacion-imagen').modal('toggle'); //Cerrar Modal
+                mensaje('Error', result.errorMsg);
+            }
+        }, 'json');
+    }
+    
+    function confirmarBorrarPlano() {
+        var idPlano = document.getElementById('idPlanoEliminar').value;
+        var idCasa = document.getElementById('idCasa').value;
+        $.post('../Servlet/administrarPlano.php?accion=BORRAR', {idPlano: idPlano, idCasa: idCasa}, function (result) {
+            if (result.success) {
+                $('#dg-confirmacion-plano').modal('toggle'); //Cerrar Modal
+                cargarTablaPlanos(idCasa); //Refrescamos la tabla
+                mensaje('Exito', result.mensaje);
+            } else {
+                $('#dg-confirmacion-plano').modal('toggle'); //Cerrar Modal
+                mensaje('Error', result.errorMsg);
+            }
+        }, 'json');
+    }
+    
     function validar(tipo, nombre) {
         var contenido = document.getElementById(nombre).value;
         if (tipo == 'text') {
@@ -345,6 +510,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
     }
 
     function validarFormulario() {
+        var accion = document.getElementById('accion').value;
         var nombreModelo = document.getElementById('nombreModelo').value;
         var m2 = document.getElementById('m2').value;
         var dormitorio = document.getElementById('dormitorio').value;
@@ -394,13 +560,15 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
             valido = false;
             cambiarEstado("especificacion", false);
         }
-        if (imagen == null || imagen == "" || tamañoImagenesPermitido == false) {
-            valido = false;
-            cambiarEstado("imagen", false);
-        }
-        if (planos == null || planos == "" || tamañoPlanosPermitido == false) {
-            valido = false;
-            cambiarEstado("planos", false)
+        if (accion == "AGREGAR") {
+            if (imagen == null || imagen == "" || tamañoImagenesPermitido == false) {
+                valido = false;
+                cambiarEstado("imagen", false);
+            }
+            if (planos == null || planos == "" || tamañoPlanosPermitido == false) {
+                valido = false;
+                cambiarEstado("planos", false)
+            }
         }
         return valido;
     }
@@ -417,7 +585,7 @@ echo "<input type='hidden' id='accionRecibida' name='accionRecibida' value='" . 
         areaTexto.removeInstance(nombre);
         areaTexto = null;
         document.getElementById(nombre).value = texto;
-        areaTexto = new nicEditor({fullPanel: true}).panelInstance(nombre, {hasPanel: true});
+        areaTexto = new nicEditor().panelInstance(nombre, {hasPanel: true});
     }
 
     function redondeoDecimales(numero, decimales) {

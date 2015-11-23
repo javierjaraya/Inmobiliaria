@@ -41,12 +41,30 @@ if ($accion != null) {
         }
     } else if ($accion == "BORRAR") {
         $idImagen = htmlspecialchars($_REQUEST['idImagen']);
-
-        $result = $control->removeImagen($idImagen);
-        if ($result) {
-            echo json_encode(array('success' => true, 'mensaje' => "Imagen borrado correctamente"));
-        } else {
-            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+        $idCasa = htmlspecialchars($_REQUEST['idCasa']);
+        
+        $imagenes = $control->getImagenByIDCasa($idCasa);
+        //Validar que qede almenos 1 imagen
+        if (count($imagenes) > 1) {
+            //Si es imagen principal, asignar a otra imagen como principal
+            $idPrincipal = getIdImagenDisponibleAPrincipal($imagenes);
+            $nuevaPrincipal = $control->getImagenByID($idPrincipal);
+            $nuevaPrincipal->setImagenPrincipal(1);//Actualizar a 1 = principal 
+            
+            $imagen = $control->getImagenByID($idImagen);
+            $result = $control->removeImagen($idImagen);//Eliminar
+            
+            $control->updateImagen($nuevaPrincipal);//Actualizar nueva principal      
+            
+            if ($result) {
+                //Si se elimino borrar la imagen del servidor
+                unlink("../../".$imagen->getRutaImagen());
+                echo json_encode(array('success' => true, 'mensaje' => "Imagen borrado correctamente"));
+            } else {
+                echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+            }
+        }else{
+            echo json_encode(array('errorMsg' => 'No se puede eliminar la imagen, debe agregar otro imagen antes de eliminar la actual.'));
         }
     } else if ($accion == "BUSCAR") {
         $cadena = htmlspecialchars($_REQUEST['cadena']);
@@ -59,6 +77,12 @@ if ($accion != null) {
         $imagen = $control->getImagenByID($idImagen);
         $json = json_encode($imagen);
         echo $json;
+    } else if ($accion == "BUSCAR_BY_ID_CASA") {
+        $idCasa = htmlspecialchars($_REQUEST['idCasa']);
+
+        $imagenes = $control->getImagenByIDCasa($idCasa);
+        $json = json_encode($imagenes);
+        echo $json;
     } else if ($accion == "ACTUALIZAR") {
         $idImagen = htmlspecialchars($_REQUEST['idImagen']);
         $idCasa = htmlspecialchars($_REQUEST['idCasa']);
@@ -66,12 +90,12 @@ if ($accion != null) {
         $nombreImagen = htmlspecialchars($_REQUEST['nombreImagen']);
         $rutaImagen = htmlspecialchars($_REQUEST['rutaImagen']);
 
-            $imagen = new ImagenDTO();
-            $imagen->setIdImagen($idImagen);
-            $imagen->setIdCasa($idCasa);
-            $imagen->setImagenPrincipal($imagenPrincipal);
-            $imagen->setNombreImagen($nombreImagen);
-            $imagen->setRutaImagen($rutaImagen);
+        $imagen = new ImagenDTO();
+        $imagen->setIdImagen($idImagen);
+        $imagen->setIdCasa($idCasa);
+        $imagen->setImagenPrincipal($imagenPrincipal);
+        $imagen->setNombreImagen($nombreImagen);
+        $imagen->setRutaImagen($rutaImagen);
 
         $result = $control->updateImagen($imagen);
         if ($result) {
@@ -81,6 +105,14 @@ if ($accion != null) {
             ));
         } else {
             echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+        }
+    }
+}
+
+function getIdImagenDisponibleAPrincipal($imagenes){
+    for ($i = 0; $i < count($imagenes); $i++) {
+        if($imagenes[$i]->getImagenPrincipal() == 0){            
+            return $imagenes[$i]->getIdImagen();            
         }
     }
 }

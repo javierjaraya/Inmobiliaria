@@ -143,6 +143,7 @@ if ($accion != null) {
         $precioKitPisoMadera = htmlspecialchars($_REQUEST['precioKitPisoMadera']);
         $precioKitPisoMaderaInstalado = htmlspecialchars($_REQUEST['precioKitPisoMaderaInstalado']);
         $precioKitPisoRadierInstalado = htmlspecialchars($_REQUEST['precioKitPisoRadierInstalado']);
+        $especificacion = htmlspecialchars($_REQUEST['especificacion']);
 
         $casa = new CasaDTO();
         $casa->setIdCasa($idCasa);
@@ -154,6 +155,7 @@ if ($accion != null) {
         $casa->setPrecioKitPisoMadera($precioKitPisoMadera);
         $casa->setPrecioKitPisoMaderaInstalado($precioKitPisoMaderaInstalado);
         $casa->setPrecioKitPisoRadierInstalado($precioKitPisoRadierInstalado);
+        $casa->setEspecificacion($especificacion);
 
         $result = $control->updateCasa($casa);
         if ($result) {

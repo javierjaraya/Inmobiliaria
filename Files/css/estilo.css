@@ -97,6 +97,21 @@ and open the template in the editor.
 .thumbnail {
     min-height: 380px;
 }
+@media only screen and (max-width: 1199px) {
+    .thumbnail {
+        min-height: 411px;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .thumbnail {
+        min-height: 441px;
+    }
+}
+@media only screen and (max-width: 667px) {
+    .thumbnail {
+        min-height: 341px;
+    }
+}
 .thumbnail img{
     width: 97%;
 }

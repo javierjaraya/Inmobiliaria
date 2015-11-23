@@ -167,7 +167,7 @@
                         contenido += "        <p><button type='submit' class='btn btn-warning'>Modificar</button>";
                         contenido += "        <button type='button' class='btn btn-danger' data-toggle='modal' data-target='#detalle' onclick='borrar(" + v.idCasa + ")'>Eliminar</button></p>";
                         contenido += "        <input type='hidden' name='idCasa' value='" + v.idCasa + "'>";
-                        contenido += "        <input type='hidden' name='accion' value='MODIFICAR'></form>";
+                        contenido += "        <input type='hidden' name='accion' value='ACTUALIZAR'></form>";
                         contenido += "    </section>";
                         contenido += "</div>";
                         contenido += "</div>";
